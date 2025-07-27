@@ -699,8 +699,21 @@ class EPRAUnifiedApp {
 
     document.body.insertAdjacentHTML('beforeend', loginModalHTML);
     
-    const modal = new bootstrap.Modal(document.getElementById('loginModal'));
-    modal.show();
+    // Show modal manually (like settings modal)
+    const modal = document.getElementById('loginModal');
+    modal.classList.add('show');
+    modal.style.display = 'block';
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    
+    // Add backdrop
+    const backdrop = document.createElement('div');
+    backdrop.className = 'modal-backdrop fade show';
+    backdrop.onclick = () => this.hideLoginModal();
+    document.body.appendChild(backdrop);
+    
+    // Setup event handlers
+    this.setupLoginModalHandlers();
 
     // Handle real login
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
@@ -749,8 +762,7 @@ class EPRAUnifiedApp {
         this.updateAuthUI();
         
         // Close modal
-        const modal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-        modal.hide();
+        this.hideLoginModal();
 
         // Reload current view to show authenticated features
         this.loadView(this.currentView);
@@ -885,6 +897,48 @@ class EPRAUnifiedApp {
     this.updateAuthUI();
     this.loadView(this.currentView);
     console.log('🔓 Authentication cleared');
+  }
+
+  hideLoginModal() {
+    const modal = document.getElementById('loginModal');
+    if (modal) {
+      modal.classList.remove('show');
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+      
+      // Remove backdrop
+      const backdrop = document.querySelector('.modal-backdrop');
+      if (backdrop) {
+        backdrop.remove();
+      }
+      
+      // Remove modal from DOM
+      modal.remove();
+    }
+  }
+
+  setupLoginModalHandlers() {
+    // Close button
+    const closeBtn = document.querySelector('#loginModal .btn-close');
+    if (closeBtn) {
+      closeBtn.onclick = () => this.hideLoginModal();
+    }
+
+    // Cancel button
+    const cancelBtn = document.querySelector('#loginModal .btn-secondary');
+    if (cancelBtn) {
+      cancelBtn.onclick = () => this.hideLoginModal();
+    }
+
+    // Escape key
+    const escapeHandler = (e) => {
+      if (e.key === 'Escape') {
+        this.hideLoginModal();
+        document.removeEventListener('keydown', escapeHandler);
+      }
+    };
+    document.addEventListener('keydown', escapeHandler);
   }
 }
 
