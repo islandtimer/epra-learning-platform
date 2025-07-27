@@ -174,7 +174,7 @@ router.get('/test-claude', authenticateToken, async (req, res) => {
     // Test with minimal direct API call
     const axios = require('axios');
     const response = await axios.post('https://api.anthropic.com/v1/messages', {
-      model: 'claude-3-5-sonnet-20241022',
+      model: 'claude-3-sonnet-20240229',
       max_tokens: 100,
       messages: [{ role: 'user', content: 'Hello' }]
     }, {
