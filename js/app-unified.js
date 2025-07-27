@@ -709,8 +709,14 @@ class EPRAUnifiedApp {
     // Add backdrop
     const backdrop = document.createElement('div');
     backdrop.className = 'modal-backdrop fade show';
-    backdrop.onclick = () => this.hideLoginModal();
     document.body.appendChild(backdrop);
+    
+    // Add click handler to modal itself to close only when clicking outside content
+    modal.onclick = (e) => {
+      if (e.target === modal) {
+        this.hideLoginModal();
+      }
+    };
     
     // Setup event handlers
     this.setupLoginModalHandlers();
