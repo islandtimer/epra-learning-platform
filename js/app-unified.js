@@ -270,16 +270,17 @@ class EPRAUnifiedApp {
     const loadingMsgId = this.addLoadingMessage();
 
     try {
-      // Send to backend API
-      const response = await fetch('/api/chat', {
+      // Send to backend AI API
+      const response = await fetch('/api/ai/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${this.accessToken}`
         },
         body: JSON.stringify({ 
-          message,
-          context: 'epra_learning'
+          query: message,
+          systemPrompt: 'You are an expert assistant for the Equator Principles and sustainable finance. Provide helpful, accurate information about environmental and social risk management in project finance.',
+          includeRealTime: false
         })
       });
 
@@ -289,8 +290,9 @@ class EPRAUnifiedApp {
       this.removeLoadingMessage(loadingMsgId);
 
       if (data.success) {
-        // Add AI response
-        this.addMessageToChat('ai', data.data.response);
+        // Extract response from Claude service response structure
+        const aiResponse = data.data.content || data.data.response || data.data.text || 'No response received';
+        this.addMessageToChat('ai', aiResponse);
       } else {
         // Handle API error
         this.addMessageToChat('ai', `Sorry, I encountered an error: ${data.message}. Please try again.`);
