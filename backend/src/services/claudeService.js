@@ -57,7 +57,7 @@ class ClaudeService {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${this.apiKey}`,
-          'anthropic-beta': 'projects-2024-01-01'
+          'anthropic-version': '2023-06-01'
         },
         timeout: 30000
       });
