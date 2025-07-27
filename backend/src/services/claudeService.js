@@ -1,0 +1,124 @@
+const axios = require('axios');
+const logger = require('../utils/logger');
+
+class ClaudeService {
+  constructor() {
+    this.apiKey = process.env.CLAUDE_API_KEY;
+    this.projectId = process.env.CLAUDE_PROJECT_ID;
+    this.baseURL = 'https://api.anthropic.com/v1/messages';
+    this.model = 'claude-3-5-sonnet-20241022';
+    
+    if (!this.apiKey) {
+      logger.warn('Claude API key not configured');
+    }
+  }
+
+  async generateResponse(query, systemPrompt, options = {}) {
+    if (!this.apiKey) {
+      throw new Error('Claude API key not configured');
+    }
+
+    const {
+      maxTokens = 2000,
+      temperature = 0.1,
+      includeContext = ''
+    } = options;
+
+    try {
+      const fullSystemPrompt = `You are EPRA, an expert assistant for Equator Principles risk assessment. 
+      Use the project knowledge containing 20+ core EP documents to provide accurate, 
+      cited responses. Always reference specific EP documents when applicable.
+
+      When providing answers:
+      1. Cite specific EP documents, sections, and page numbers when possible
+      2. Use the exact terminology from EP4 and IFC Performance Standards
+      3. Provide practical, actionable guidance for practitioners
+      4. Consider sector-specific requirements when relevant
+      5. Format responses with clear structure and bullet points when appropriate
+      6. Include relevant risk categories (A, B, C) when discussing project classification
+
+      ${includeContext ? `Additional context: ${includeContext}` : ''}
+      ${systemPrompt ? `Additional instructions: ${systemPrompt}` : ''}`;
+
+      const requestBody = {
+        model: this.model,
+        system: fullSystemPrompt,
+        messages: [{ role: 'user', content: query }],
+        max_tokens: maxTokens,
+        temperature: temperature
+      };
+
+      // Add project ID if available
+      if (this.projectId) {
+        requestBody.project_id = this.projectId;
+      }
+
+      const response = await axios.post(this.baseURL, requestBody, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.apiKey}`,
+          'anthropic-beta': 'projects-2024-01-01'
+        },
+        timeout: 30000
+      });
+
+      const content = response.data.content[0].text;
+      const citations = this.extractCitations(content);
+
+      return {
+        content,
+        citations,
+        usage: response.data.usage || {},
+        model: this.model,
+        timestamp: new Date().toISOString()
+      };
+
+    } catch (error) {
+      logger.error('Claude API Error:', {
+        message: error.message,
+        status: error.response?.status,
+        data: error.response?.data
+      });
+
+      if (error.response?.status === 401) {
+        throw new Error('Invalid Claude API key');
+      } else if (error.response?.status === 429) {
+        throw new Error('Claude API rate limit exceeded');
+      } else if (error.response?.status === 400) {
+        throw new Error('Invalid request to Claude API');
+      } else {
+        throw new Error('Claude API temporarily unavailable');
+      }
+    }
+  }
+
+  extractCitations(text) {
+    const citations = [];
+    const epDocPatterns = [
+      { pattern: /EP4|Equator Principles/gi, title: 'Equator Principles EP4', type: 'core' },
+      { pattern: /IFC Performance Standard/gi, title: 'IFC Performance Standards', type: 'standard' },
+      { pattern: /Climate Change Risk Assessment/gi, title: 'Climate Change Risk Assessment Guidance', type: 'guidance' },
+      { pattern: /Human Rights Assessment/gi, title: 'Human Rights Assessment Guidance', type: 'guidance' },
+      { pattern: /Biodiversity.*Guidance/gi, title: 'Biodiversity Baseline Surveys Guidance', type: 'guidance' },
+      { pattern: /ESMS|Environmental.*Social.*Management/gi, title: 'ESMS Implementation Handbook', type: 'handbook' },
+      { pattern: /Independent.*ESDD/gi, title: 'Independent ESDD Review Guidance', type: 'guidance' }
+    ];
+
+    epDocPatterns.forEach(({ pattern, title, type }) => {
+      if (pattern.test(text)) {
+        citations.push({ title, type, version: 'From EP Knowledge Base' });
+      }
+    });
+
+    return citations.length > 0 ? 
+      [...new Set(citations.map(c => JSON.stringify(c)))].map(c => JSON.parse(c)) : 
+      [{ title: 'EP Knowledge Base', type: 'general', version: 'Multiple sources' }];
+  }
+
+  needsCurrentInfo(query) {
+    const timeKeywords = ['latest', 'current', 'recent', 'updated', '2024', '2025', 'new regulations', 'policy changes', 'amendments'];
+    return timeKeywords.some(keyword => query.toLowerCase().includes(keyword));
+  }
+}
+
+module.exports = ClaudeService;

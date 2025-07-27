@@ -1,0 +1,106 @@
+/*
+  Debug Buttons - Ensure Button Visibility
+  ========================================
+  Temporary CSS to force button visibility and debug icons
+*/
+
+/* Force FontAwesome to load properly */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+
+/* Debug: Force button visibility with background colors */
+#settingsBtn, #darkToggle {
+  background: rgba(255, 0, 0, 0.3) !important; /* Red tint for debugging */
+  border: 2px solid white !important;
+  color: white !important;
+  padding: 0.5rem !important;
+  border-radius: 0.375rem !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 0.25rem !important;
+  position: relative !important;
+  cursor: pointer !important;
+}
+
+/* Force text content as fallback */
+#settingsBtn::after {
+  content: "⚙️" !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  font-size: 16px !important;
+  color: white !important;
+  z-index: 10 !important;
+}
+
+#darkToggle::after {
+  content: "🌙" !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  font-size: 16px !important;
+  color: white !important;
+  z-index: 10 !important;
+}
+
+/* Hide FontAwesome if it's causing issues */
+#settingsBtn i, #darkToggle i {
+  display: none !important;
+}
+
+/* Language selector debug */
+#langSelect {
+  background: rgba(0, 255, 0, 0.3) !important; /* Green tint for debugging */
+  border: 2px solid white !important;
+  color: white !important;
+  padding: 0.375rem 0.75rem !important;
+  border-radius: 0.375rem !important;
+  font-size: 0.875rem !important;
+  min-width: 60px !important;
+}
+
+#langSelect option {
+  background: #1d4ed8 !important;
+  color: white !important;
+}
+
+/* Force hover states */
+#settingsBtn:hover, #darkToggle:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: scale(1.1) !important;
+}
+
+/* Make sure right side container is visible */
+.navbar .d-flex {
+  background: rgba(0, 0, 255, 0.2) !important; /* Blue tint for debugging */
+  padding: 0.5rem !important;
+  border-radius: 0.5rem !important;
+  gap: 0.5rem !important;
+}
+
+/* Debug info */
+body::after {
+  content: "Debug: Buttons should show with colored backgrounds and emoji icons";
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  z-index: 9999;
+  max-width: 300px;
+}
+
+/* Ensure buttons are clickable */
+#settingsBtn, #darkToggle, #langSelect {
+  pointer-events: auto !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+}

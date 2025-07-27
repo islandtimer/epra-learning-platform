@@ -1,0 +1,78 @@
+/* 
+  Navigation Fix - Force Menu Labels to be Visible
+  ===============================================
+*/
+
+/* Force navigation labels to always be visible */
+.nav-label,
+.navbar-nav .nav-link span,
+.navbar-nav .nav-link .nav-label {
+  display: inline !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: inherit !important;
+  font-size: inherit !important;
+  margin-left: 0.5rem !important;
+}
+
+/* Ensure nav links display properly */
+.navbar-nav .nav-link {
+  display: flex !important;
+  align-items: center !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  text-decoration: none !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 0.375rem !important;
+  transition: all 0.2s ease !important;
+}
+
+.navbar-nav .nav-link:hover {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.navbar-nav .nav-link.active {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  font-weight: 600 !important;
+}
+
+/* Ensure icons are visible */
+.navbar-nav .nav-link i {
+  display: inline-block !important;
+  margin-right: 0.5rem !important;
+  width: 1.2em !important;
+  text-align: center !important;
+}
+
+/* Force text to be visible on all screen sizes */
+@media (min-width: 992px) {
+  .nav-label {
+    display: inline !important;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .navbar-nav .nav-link {
+    padding: 0.75rem 1rem !important;
+    margin: 0.25rem 0 !important;
+    width: 100% !important;
+  }
+  
+  .nav-label {
+    display: inline !important;
+    margin-left: 0.75rem !important;
+  }
+}
+
+/* Override any Bootstrap or other CSS that might hide text */
+.navbar-nav .nav-link * {
+  display: inline !important;
+}
+
+/* Debug: Add a background to see if the text is there but invisible */
+.nav-label {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+}

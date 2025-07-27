@@ -1,0 +1,96 @@
+const axios = require('axios');
+const logger = require('../utils/logger');
+
+class PerplexityService {
+  constructor() {
+    this.apiKey = process.env.PERPLEXITY_API_KEY;
+    this.baseURL = 'https://api.perplexity.ai/chat/completions';
+    this.model = 'llama-3.1-sonar-large-128k-online';
+    
+    if (!this.apiKey) {
+      logger.warn('Perplexity API key not configured');
+    }
+  }
+
+  async searchCurrent(query, options = {}) {
+    if (!this.apiKey) {
+      throw new Error('Perplexity API key not configured');
+    }
+
+    const {
+      domains = ['equator-principles.com', 'ifc.org', 'worldbank.org', 'ebrd.com'],
+      temperature = 0.2,
+      maxTokens = 1000
+    } = options;
+
+    try {
+      const response = await axios.post(this.baseURL, {
+        model: this.model,
+        messages: [{
+          role: 'user',
+          content: `Search for current information about: ${query}. 
+          Focus on regulatory updates, policy changes, and industry developments 
+          related to Equator Principles and environmental finance. 
+          Provide specific sources and dates when available.`
+        }],
+        search_domain_filter: domains,
+        return_citations: true,
+        return_images: false,
+        temperature: temperature,
+        max_tokens: maxTokens
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.apiKey}`
+        },
+        timeout: 30000
+      });
+
+      return {
+        content: response.data.choices[0].message.content,
+        citations: response.data.citations || [],
+        sources: response.data.choices[0].message.sources || [],
+        usage: response.data.usage || {},
+        timestamp: new Date().toISOString()
+      };
+
+    } catch (error) {
+      logger.error('Perplexity API Error:', {
+        message: error.message,
+        status: error.response?.status,
+        data: error.response?.data
+      });
+
+      if (error.response?.status === 401) {
+        throw new Error('Invalid Perplexity API key');
+      } else if (error.response?.status === 429) {
+        throw new Error('Perplexity API rate limit exceeded');
+      } else if (error.response?.status === 400) {
+        throw new Error('Invalid request to Perplexity API');
+      } else {
+        throw new Error('Perplexity API temporarily unavailable');
+      }
+    }
+  }
+
+  async enhanceWithCurrentInfo(query, claudeResponse) {
+    try {
+      const currentInfo = await this.searchCurrent(query);
+      
+      return {
+        ...claudeResponse,
+        enhancedWithCurrent: true,
+        currentContext: {
+          content: currentInfo.content,
+          sources: currentInfo.sources,
+          citations: currentInfo.citations
+        }
+      };
+    } catch (error) {
+      logger.warn('Failed to enhance with current info:', error.message);
+      return claudeResponse;
+    }
+  }
+}
+
+module.exports = PerplexityService;

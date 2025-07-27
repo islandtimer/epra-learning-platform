@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" data-color-scheme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EPRA Learning – Equator Principles Educational Platform</title>
+  <!-- Bootswatch Flatly (Bootstrap 5.3 theme) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/flatly/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome 6 Free -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <!-- Custom global styles -->
+  <link href="style-simplified.css" rel="stylesheet">
+  <!-- Modern enhanced styles -->
+  <link href="style-modern.css" rel="stylesheet">
+  <!-- Visual fixes -->
+  <link href="css/visual-fixes.css" rel="stylesheet">
+  <!-- Navigation fix -->
+  <link href="css/navigation-fix.css" rel="stylesheet">
+  <!-- Complete navbar fix (loads last to override everything) -->
+  <link href="css/navbar-complete-fix.css" rel="stylesheet">
+  <!-- Modal functionality fix -->
+  <link href="css/modal-fix.css" rel="stylesheet">
+  <!-- Production button styling -->
+  <link href="css/production-buttons.css" rel="stylesheet">
+  <!-- marked (Markdown to HTML) & DOMPurify for safe rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.4/dist/purify.min.js" defer></script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+  <!-- Demo mode banner -->
+  <div id="demoBanner" class="alert alert-info alert-dismissible fade show rounded-0 mb-0" role="alert">
+    <div class="container d-flex align-items-center justify-content-between">
+      <div>
+        <i class="fa-solid fa-info-circle me-2"></i>
+        <strong>Welcome to EPRA Learning:</strong> <span id="authPrompt">Sign in for full access to AI assistance and progress tracking.</span>
+      </div>
+      <div>
+        <button type="button" class="btn btn-primary btn-sm me-2" id="loginPromptBtn">
+          <i class="fa-solid fa-sign-in-alt me-1"></i>Sign In
+        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary" aria-label="Main navigation">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#chat">
+        <i class="fa-solid fa-graduation-cap me-2"></i>EPRA Learning
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" role="tablist">
+          <li class="nav-item">
+            <a id="nav-chat" class="nav-link active" href="#chat" role="tab">
+              <i class="fa-solid fa-comments"></i>
+              <span class="nav-label" data-i18n="chat">Chat</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a id="nav-learning" class="nav-link" href="#learning" role="tab">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <span class="nav-label" data-i18n="learning">Learning</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <!-- Settings button -->
+          <button id="settingsBtn" class="btn btn-outline-light btn-sm" aria-label="Settings">
+            <i class="fa-solid fa-gear"></i>
+          </button>
+          <!-- Dark mode toggle -->
+          <button id="darkToggle" class="btn btn-outline-light btn-sm" aria-label="Toggle dark mode">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+          <!-- Language selector -->
+          <select id="langSelect" class="form-select form-select-sm w-auto" aria-label="Language selector">
+            <option value="en" selected>EN</option>
+            <option value="es">ES</option>
+            <option value="fr">FR</option>
+            <option value="zh">中文</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main container -->
+  <main id="tabContent" class="container my-4 flex-grow-1" tabindex="-1">
+    <!-- Views injected here by app.js -->
+  </main>
+
+  <!-- Settings Modal -->
+  <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="settingsModalLabel">
+            <i class="fa-solid fa-gear me-2"></i>User Preferences
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-info">
+            <i class="fa-solid fa-info-circle me-2"></i>
+            <strong>Note:</strong> API keys are configured server-side for security. These are your personal preferences.
+          </div>
+
+          <div class="mb-3">
+            <label for="themeSelect" class="form-label">
+              <i class="fa-solid fa-palette me-2"></i>Theme
+            </label>
+            <select class="form-select" id="themeSelect">
+              <option value="light">Light Mode</option>
+              <option value="dark">Dark Mode</option>
+              <option value="auto">Auto (System Preference)</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="languageSelect" class="form-label">
+              <i class="fa-solid fa-globe me-2"></i>Language
+            </label>
+            <select class="form-select" id="languageSelect">
+              <option value="en">English</option>
+              <option value="es">Español</option>
+              <option value="fr">Français</option>
+              <option value="zh">中文</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="notificationsEnabled">
+              <label class="form-check-label" for="notificationsEnabled">
+                <i class="fa-solid fa-bell me-2"></i>Enable notifications
+              </label>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="autoSaveProgress" checked>
+              <label class="form-check-label" for="autoSaveProgress">
+                <i class="fa-solid fa-save me-2"></i>Auto-save learning progress
+              </label>
+            </div>
+          </div>
+
+          <div id="settingsStatus" class="mt-3"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fa-solid fa-times me-2"></i>Cancel
+          </button>
+          <button type="button" class="btn btn-primary" id="saveUserSettings">
+            <i class="fa-solid fa-save me-2"></i>Save Preferences
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Offcanvas for citations / references -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="citationCanvas" aria-labelledby="citationCanvasLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="citationCanvasLabel">
+        <i class="fa-solid fa-quote-left me-2"></i>References
+      </h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div id="citationList"></div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS (Popper included) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Unified Functional Application -->
+  <script src="js/app-unified.js"></script>
+</body>
+</html>

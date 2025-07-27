@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" data-color-scheme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Complete EPRA Test</title>
+  
+  <!-- CSS Files -->
+  <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/flatly/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="css/debug-buttons.css" rel="stylesheet">
+  
+  <style>
+    .test-section {
+      background: #f8f9fa;
+      border: 2px solid #dee2e6;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0.5rem;
+    }
+    .test-result {
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border-radius: 0.25rem;
+    }
+    .pass { background: #d1edff; border-left: 4px solid #0066cc; }
+    .fail { background: #ffe6e6; border-left: 4px solid #cc0000; }
+  </style>
+</head>
+<body>
+  <!-- Demo Banner -->
+  <div id="demoBanner" class="alert alert-info alert-dismissible fade show rounded-0 mb-0" role="alert">
+    <div class="container d-flex align-items-center justify-content-between">
+      <div>
+        <i class="fa-solid fa-info-circle me-2"></i>
+        <strong>Test Banner:</strong> <span id="authPrompt">This text should be readable</span>
+      </div>
+      <div>
+        <button type="button" class="btn btn-primary btn-sm me-2" id="loginPromptBtn">
+          <i class="fa-solid fa-sign-in-alt me-1"></i>Sign In
+        </button>
+        <button type="button" class="btn-close" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#chat">
+        <i class="fa-solid fa-graduation-cap me-2"></i>EPRA Learning
+      </a>
+      
+      <div class="navbar-nav me-auto">
+        <a class="nav-link active" href="#chat">
+          <i class="fa-solid fa-comments"></i>
+          <span class="nav-label">Chat</span>
+        </a>
+        <a class="nav-link" href="#learning">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span class="nav-label">Learning</span>
+        </a>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        <button id="settingsBtn" class="btn btn-outline-light btn-sm">
+          <i class="fa-solid fa-gear"></i>
+        </button>
+        <button id="darkToggle" class="btn btn-outline-light btn-sm">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <select id="langSelect" class="form-select form-select-sm w-auto">
+          <option value="en" selected>EN</option>
+          <option value="es">ES</option>
+          <option value="fr">FR</option>
+        </select>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Test Results -->
+  <div class="container mt-4">
+    <h1>EPRA App Test Results</h1>
+    
+    <div class="test-section">
+      <h3>Visual Elements Test</h3>
+      <div id="visualTests"></div>
+    </div>
+    
+    <div class="test-section">
+      <h3>Functionality Test</h3>
+      <div id="functionalityTests"></div>
+      <button class="btn btn-primary" onclick="runTests()">Run All Tests</button>
+    </div>
+  </div>
+
+  <!-- Mock Modal -->
+  <div class="modal fade" id="settingsModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Settings Test</h5>
+          <button type="button" class="btn-close"></button>
+        </div>
+        <div class="modal-body">
+          <p>If you can see this, the modal is working!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Test functions
+    function checkElement(selector, name) {
+      const element = document.querySelector(selector);
+      const exists = !!element;
+      const visible = exists && element.offsetParent !== null;
+      const hasContent = exists && (element.textContent.trim() || element.innerHTML.includes('fa-'));
+      
+      return {
+        name,
+        exists,
+        visible,
+        hasContent,
+        pass: exists && visible && hasContent
+      };
+    }
+
+    function displayTest(test) {
+      const className = test.pass ? 'pass' : 'fail';
+      const status = test.pass ? '✅ PASS' : '❌ FAIL';
+      return `<div class="test-result ${className}">
+        <strong>${test.name}:</strong> ${status}
+        <br><small>Exists: ${test.exists}, Visible: ${test.visible}, Has Content: ${test.hasContent}</small>
+      </div>`;
+    }
+
+    function runVisualTests() {
+      const tests = [
+        checkElement('#demoBanner', 'Demo Banner'),
+        checkElement('.navbar-brand', 'EPRA Brand Logo'),
+        checkElement('.nav-label', 'Navigation Labels'),
+        checkElement('#settingsBtn', 'Settings Button'),
+        checkElement('#darkToggle', 'Dark Mode Button'),
+        checkElement('#langSelect', 'Language Selector'),
+        checkElement('#loginPromptBtn', 'Login Button')
+      ];
+
+      document.getElementById('visualTests').innerHTML = tests.map(displayTest).join('');
+    }
+
+    function runFunctionalTests() {
+      const results = [];
+      
+      // Test button clicks
+      try {
+        document.getElementById('settingsBtn').click();
+        results.push({ name: 'Settings Button Click', pass: true });
+      } catch (e) {
+        results.push({ name: 'Settings Button Click', pass: false });
+      }
+
+      try {
+        document.getElementById('darkToggle').click();
+        results.push({ name: 'Dark Mode Toggle Click', pass: true });
+      } catch (e) {
+        results.push({ name: 'Dark Mode Toggle Click', pass: false });
+      }
+
+      try {
+        document.getElementById('langSelect').value = 'es';
+        results.push({ name: 'Language Selector Change', pass: true });
+      } catch (e) {
+        results.push({ name: 'Language Selector Change', pass: false });
+      }
+
+      document.getElementById('functionalityTests').innerHTML = results.map(test => 
+        `<div class="test-result ${test.pass ? 'pass' : 'fail'}">
+          <strong>${test.name}:</strong> ${test.pass ? '✅ PASS' : '❌ FAIL'}
+        </div>`
+      ).join('');
+    }
+
+    function runTests() {
+      runVisualTests();
+      runFunctionalTests();
+    }
+
+    // Simple event handlers for testing
+    document.getElementById('settingsBtn').onclick = () => {
+      alert('Settings button works!');
+      const modal = document.getElementById('settingsModal');
+      modal.style.display = 'block';
+      modal.classList.add('show');
+    };
+
+    document.getElementById('darkToggle').onclick = () => {
+      alert('Dark mode button works!');
+    };
+
+    document.getElementById('langSelect').onchange = (e) => {
+      alert('Language changed to: ' + e.target.value);
+    };
+
+    // Close modal
+    document.querySelector('.btn-close').onclick = () => {
+      const modal = document.getElementById('settingsModal');
+      modal.style.display = 'none';
+      modal.classList.remove('show');
+    };
+
+    // Run tests on load
+    window.onload = runTests;
+  </script>
+</body>
+</html>

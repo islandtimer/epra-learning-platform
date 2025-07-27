@@ -1,0 +1,25 @@
+{
+  "name": "epra-learning-platform",
+  "version": "1.0.0",
+  "description": "EPRA Learning Platform",
+  "main": "backend/src/server.js",
+  "scripts": {
+    "start": "node backend/src/server.js"
+  },
+  "dependencies": {
+    "express": "4.18.2",
+    "helmet": "7.1.0",
+    "cors": "2.8.5",
+    "dotenv": "16.3.1",
+    "pg": "8.11.3",
+    "bcryptjs": "2.4.3",
+    "jsonwebtoken": "9.0.2",
+    "winston": "3.11.0"
+  },
+  "engines": {
+    "node": "18.x"
+  },
+  "keywords": ["epra", "learning"],
+  "author": "EPRA Team",
+  "license": "MIT"
+}

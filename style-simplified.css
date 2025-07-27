@@ -1,0 +1,1233 @@
+ style-simplified.css                                                                                                                         │ │
+│ │                                                                                                                                              │ │
+│ │ /*                                                                                                                                           │ │
+│ │   style-simplified.css – EPRA Learning Simplified Styling                                                                                    │ │
+│ │   -----------------------------------------------------                                                                                      │ │
+│ │   Simplified styling for EPRA Learning app with only:                                                                                        │ │
+│ │   - Chat interface styling                                                                                                                   │ │
+│ │   - Learning module system styling                                                                                                           │ │
+│ │   - Core design system components                                                                                                            │ │
+│ │   - No dashboard or toolkit specific styles                                                                                                  │ │
+│ │ */                                                                                                                                           │ │
+│ │                                                                                                                                              │ │
+│ │ :root {                                                                                                                                      │ │
+│ │   /* Colors */                                                                                                                               │ │
+│ │   --color-background: rgba(252, 252, 249, 1);                                                                                                │ │
+│ │   --color-surface: rgba(255, 255, 253, 1);                                                                                                   │ │
+│ │   --color-text: rgba(19, 52, 59, 1);                                                                                                         │ │
+│ │   --color-text-secondary: rgba(98, 108, 113, 1);                                                                                             │ │
+│ │   --color-primary: rgba(33, 128, 141, 1);                                                                                                    │ │
+│ │   --color-primary-hover: rgba(29, 116, 128, 1);                                                                                              │ │
+│ │   --color-primary-active: rgba(26, 104, 115, 1);                                                                                             │ │
+│ │   --color-secondary: rgba(94, 82, 64, 0.12);                                                                                                 │ │
+│ │   --color-secondary-hover: rgba(94, 82, 64, 0.2);                                                                                            │ │
+│ │   --color-secondary-active: rgba(94, 82, 64, 0.25);                                                                                          │ │
+│ │   --color-border: rgba(94, 82, 64, 0.2);                                                                                                     │ │
+│ │   --color-btn-primary-text: rgba(252, 252, 249, 1);                                                                                          │ │
+│ │   --color-card-border: rgba(94, 82, 64, 0.12);                                                                                               │ │
+│ │   --color-card-border-inner: rgba(94, 82, 64, 0.12);                                                                                         │ │
+│ │   --color-error: rgba(192, 21, 47, 1);                                                                                                       │ │
+│ │   --color-success: rgba(33, 128, 141, 1);                                                                                                    │ │
+│ │   --color-warning: rgba(168, 75, 47, 1);                                                                                                     │ │
+│ │   --color-info: rgba(98, 108, 113, 1);                                                                                                       │ │
+│ │   --color-focus-ring: rgba(33, 128, 141, 0.4);                                                                                               │ │
+│ │   --color-select-caret: rgba(19, 52, 59, 0.8);                                                                                               │ │
+│ │                                                                                                                                              │ │
+│ │   /* Common style patterns */                                                                                                                │ │
+│ │   --focus-ring: 0 0 0 3px var(--color-focus-ring);                                                                                           │ │
+│ │   --focus-outline: 2px solid var(--color-primary);                                                                                           │ │
+│ │   --status-bg-opacity: 0.15;                                                                                                                 │ │
+│ │   --status-border-opacity: 0.25;                                                                                                             │ │
+│ │   --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'         │ │
+│ │ fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18            │ │
+│ │ 9'%3E%3C/polyline%3E%3C/svg%3E");                                                                                                            │ │
+│ │   --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'          │ │
+│ │ fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18            │ │
+│ │ 9'%3E%3C/polyline%3E%3C/svg%3E");                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │   /* RGB versions for opacity control */                                                                                                     │ │
+│ │   --color-success-rgb: 33, 128, 141;                                                                                                         │ │
+│ │   --color-error-rgb: 192, 21, 47;                                                                                                            │ │
+│ │   --color-warning-rgb: 168, 75, 47;                                                                                                          │ │
+│ │   --color-info-rgb: 98, 108, 113;                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │   /* Typography */                                                                                                                           │ │
+│ │   --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system,                                                                      │ │
+│ │     BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;                                                                                      │ │
+│ │   --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo,                                                                  │ │
+│ │     Monaco, Consolas, monospace;                                                                                                             │ │
+│ │   --font-size-xs: 11px;                                                                                                                      │ │
+│ │   --font-size-sm: 12px;                                                                                                                      │ │
+│ │   --font-size-base: 14px;                                                                                                                    │ │
+│ │   --font-size-md: 14px;                                                                                                                      │ │
+│ │   --font-size-lg: 16px;                                                                                                                      │ │
+│ │   --font-size-xl: 18px;                                                                                                                      │ │
+│ │   --font-size-2xl: 20px;                                                                                                                     │ │
+│ │   --font-size-3xl: 24px;                                                                                                                     │ │
+│ │   --font-size-4xl: 30px;                                                                                                                     │ │
+│ │   --font-weight-normal: 400;                                                                                                                 │ │
+│ │   --font-weight-medium: 500;                                                                                                                 │ │
+│ │   --font-weight-semibold: 550;                                                                                                               │ │
+│ │   --font-weight-bold: 600;                                                                                                                   │ │
+│ │   --line-height-tight: 1.2;                                                                                                                  │ │
+│ │   --line-height-normal: 1.5;                                                                                                                 │ │
+│ │   --letter-spacing-tight: -0.01em;                                                                                                           │ │
+│ │                                                                                                                                              │ │
+│ │   /* Spacing */                                                                                                                              │ │
+│ │   --space-0: 0;                                                                                                                              │ │
+│ │   --space-1: 1px;                                                                                                                            │ │
+│ │   --space-2: 2px;                                                                                                                            │ │
+│ │   --space-4: 4px;                                                                                                                            │ │
+│ │   --space-6: 6px;                                                                                                                            │ │
+│ │   --space-8: 8px;                                                                                                                            │ │
+│ │   --space-10: 10px;                                                                                                                          │ │
+│ │   --space-12: 12px;                                                                                                                          │ │
+│ │   --space-16: 16px;                                                                                                                          │ │
+│ │   --space-20: 20px;                                                                                                                          │ │
+│ │   --space-24: 24px;                                                                                                                          │ │
+│ │   --space-32: 32px;                                                                                                                          │ │
+│ │                                                                                                                                              │ │
+│ │   /* Border Radius */                                                                                                                        │ │
+│ │   --radius-sm: 6px;                                                                                                                          │ │
+│ │   --radius-base: 8px;                                                                                                                        │ │
+│ │   --radius-md: 10px;                                                                                                                         │ │
+│ │   --radius-lg: 12px;                                                                                                                         │ │
+│ │   --radius-full: 9999px;                                                                                                                     │ │
+│ │                                                                                                                                              │ │
+│ │   /* Shadows */                                                                                                                              │ │
+│ │   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);                                                                                                │ │
+│ │   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);                                                                 │ │
+│ │   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04),                                                                                           │ │
+│ │     0 2px 4px -1px rgba(0, 0, 0, 0.02);                                                                                                      │ │
+│ │   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04),                                                                                         │ │
+│ │     0 4px 6px -2px rgba(0, 0, 0, 0.02);                                                                                                      │ │
+│ │   --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.15),                                                                                │ │
+│ │     inset 0 -1px 0 rgba(0, 0, 0, 0.03);                                                                                                      │ │
+│ │                                                                                                                                              │ │
+│ │   /* Animation */                                                                                                                            │ │
+│ │   --duration-fast: 150ms;                                                                                                                    │ │
+│ │   --duration-normal: 250ms;                                                                                                                  │ │
+│ │   --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │   /* Layout */                                                                                                                               │ │
+│ │   --container-sm: 640px;                                                                                                                     │ │
+│ │   --container-md: 768px;                                                                                                                     │ │
+│ │   --container-lg: 1024px;                                                                                                                    │ │
+│ │   --container-xl: 1280px;                                                                                                                    │ │
+│ │                                                                                                                                              │ │
+│ │   /* Enhanced EP color palette */                                                                                                            │ │
+│ │   --epra-blue: #1fb8cd;                                                                                                                      │ │
+│ │   --epra-green: #2ecc71;                                                                                                                     │ │
+│ │   --epra-purple: #9b59b6;                                                                                                                    │ │
+│ │   --epra-orange: #f39c12;                                                                                                                    │ │
+│ │   --epra-red: #e74c3c;                                                                                                                       │ │
+│ │   --epra-dark-blue: #2c3e50;                                                                                                                 │ │
+│ │   --epra-light-bg: #f8f9fa;                                                                                                                  │ │
+│ │   --epra-border: #dee2e6;                                                                                                                    │ │
+│ │   --epra-text-muted: #6c757d;                                                                                                                │ │
+│ │   --epra-success: #27ae60;                                                                                                                   │ │
+│ │   --epra-warning: #f1c40f;                                                                                                                   │ │
+│ │   --epra-info: #3498db;                                                                                                                      │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Dark mode colors */                                                                                                                       │ │
+│ │ @media (prefers-color-scheme: dark) {                                                                                                        │ │
+│ │   :root {                                                                                                                                    │ │
+│ │     --color-background: rgba(31, 33, 33, 1);                                                                                                 │ │
+│ │     --color-surface: rgba(38, 40, 40, 1);                                                                                                    │ │
+│ │     --color-text: rgba(245, 245, 245, 1);                                                                                                    │ │
+│ │     --color-text-secondary: rgba(167, 169, 169, 0.7);                                                                                        │ │
+│ │     --color-primary: rgba(50, 184, 198, 1);                                                                                                  │ │
+│ │     --color-primary-hover: rgba(45, 166, 178, 1);                                                                                            │ │
+│ │     --color-primary-active: rgba(41, 150, 161, 1);                                                                                           │ │
+│ │     --color-secondary: rgba(119, 124, 124, 0.15);                                                                                            │ │
+│ │     --color-secondary-hover: rgba(119, 124, 124, 0.25);                                                                                      │ │
+│ │     --color-secondary-active: rgba(119, 124, 124, 0.3);                                                                                      │ │
+│ │     --color-border: rgba(119, 124, 124, 0.3);                                                                                                │ │
+│ │     --color-error: rgba(255, 84, 89, 1);                                                                                                     │ │
+│ │     --color-success: rgba(50, 184, 198, 1);                                                                                                  │ │
+│ │     --color-warning: rgba(230, 129, 97, 1);                                                                                                  │ │
+│ │     --color-info: rgba(167, 169, 169, 1);                                                                                                    │ │
+│ │     --color-focus-ring: rgba(50, 184, 198, 0.4);                                                                                             │ │
+│ │     --color-btn-primary-text: rgba(19, 52, 59, 1);                                                                                           │ │
+│ │     --color-card-border: rgba(119, 124, 124, 0.2);                                                                                           │ │
+│ │     --color-card-border-inner: rgba(119, 124, 124, 0.15);                                                                                    │ │
+│ │     --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1),                                                                               │ │
+│ │       inset 0 -1px 0 rgba(0, 0, 0, 0.15);                                                                                                    │ │
+│ │     --button-border-secondary: rgba(119, 124, 124, 0.2);                                                                                     │ │
+│ │     --color-border-secondary: rgba(119, 124, 124, 0.2);                                                                                      │ │
+│ │     --color-select-caret: rgba(245, 245, 245, 0.8);                                                                                          │ │
+│ │                                                                                                                                              │ │
+│ │     /* RGB versions for dark mode */                                                                                                         │ │
+│ │     --color-success-rgb: 50, 184, 198;                                                                                                       │ │
+│ │     --color-error-rgb: 255, 84, 89;                                                                                                          │ │
+│ │     --color-warning-rgb: 230, 129, 97;                                                                                                       │ │
+│ │     --color-info-rgb: 167, 169, 169;                                                                                                         │ │
+│ │                                                                                                                                              │ │
+│ │     --epra-light-bg: #343a40;                                                                                                                │ │
+│ │     --epra-border: #495057;                                                                                                                  │ │
+│ │     --epra-text-muted: #adb5bd;                                                                                                              │ │
+│ │   }                                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Data attribute for manual theme switching */                                                                                              │ │
+│ │ [data-color-scheme="dark"] {                                                                                                                 │ │
+│ │   --color-background: rgba(31, 33, 33, 1);                                                                                                   │ │
+│ │   --color-surface: rgba(38, 40, 40, 1);                                                                                                      │ │
+│ │   --color-text: rgba(245, 245, 245, 1);                                                                                                      │ │
+│ │   --color-text-secondary: rgba(167, 169, 169, 0.7);                                                                                          │ │
+│ │   --color-primary: rgba(50, 184, 198, 1);                                                                                                    │ │
+│ │   --color-primary-hover: rgba(45, 166, 178, 1);                                                                                              │ │
+│ │   --color-primary-active: rgba(41, 150, 161, 1);                                                                                             │ │
+│ │   --color-secondary: rgba(119, 124, 124, 0.15);                                                                                              │ │
+│ │   --color-secondary-hover: rgba(119, 124, 124, 0.25);                                                                                        │ │
+│ │   --color-secondary-active: rgba(119, 124, 124, 0.3);                                                                                        │ │
+│ │   --color-border: rgba(119, 124, 124, 0.3);                                                                                                  │ │
+│ │   --color-error: rgba(255, 84, 89, 1);                                                                                                       │ │
+│ │   --color-success: rgba(50, 184, 198, 1);                                                                                                    │ │
+│ │   --color-warning: rgba(230, 129, 97, 1);                                                                                                    │ │
+│ │   --color-info: rgba(167, 169, 169, 1);                                                                                                      │ │
+│ │   --color-focus-ring: rgba(50, 184, 198, 0.4);                                                                                               │ │
+│ │   --color-btn-primary-text: rgba(19, 52, 59, 1);                                                                                             │ │
+│ │   --color-card-border: rgba(119, 124, 124, 0.15);                                                                                            │ │
+│ │   --color-card-border-inner: rgba(119, 124, 124, 0.15);                                                                                      │ │
+│ │   --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1),                                                                                 │ │
+│ │     inset 0 -1px 0 rgba(0, 0, 0, 0.15);                                                                                                      │ │
+│ │   --color-border-secondary: rgba(119, 124, 124, 0.2);                                                                                        │ │
+│ │   --color-select-caret: rgba(245, 245, 245, 0.8);                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │   /* RGB versions for dark mode */                                                                                                           │ │
+│ │   --color-success-rgb: 50, 184, 198;                                                                                                         │ │
+│ │   --color-error-rgb: 255, 84, 89;                                                                                                            │ │
+│ │   --color-warning-rgb: 230, 129, 97;                                                                                                         │ │
+│ │   --color-info-rgb: 167, 169, 169;                                                                                                           │ │
+│ │                                                                                                                                              │ │
+│ │   --epra-light-bg: #343a40;                                                                                                                  │ │
+│ │   --epra-border: #495057;                                                                                                                    │ │
+│ │   --epra-text-muted: #adb5bd;                                                                                                                │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ [data-color-scheme="light"] {                                                                                                                │ │
+│ │   --color-background: rgba(252, 252, 249, 1);                                                                                                │ │
+│ │   --color-surface: rgba(255, 255, 253, 1);                                                                                                   │ │
+│ │   --color-text: rgba(19, 52, 59, 1);                                                                                                         │ │
+│ │   --color-text-secondary: rgba(98, 108, 113, 1);                                                                                             │ │
+│ │   --color-primary: rgba(33, 128, 141, 1);                                                                                                    │ │
+│ │   --color-primary-hover: rgba(29, 116, 128, 1);                                                                                              │ │
+│ │   --color-primary-active: rgba(26, 104, 115, 1);                                                                                             │ │
+│ │   --color-secondary: rgba(94, 82, 64, 0.12);                                                                                                 │ │
+│ │   --color-secondary-hover: rgba(94, 82, 64, 0.2);                                                                                            │ │
+│ │   --color-secondary-active: rgba(94, 82, 64, 0.25);                                                                                          │ │
+│ │   --color-border: rgba(94, 82, 64, 0.2);                                                                                                     │ │
+│ │   --color-btn-primary-text: rgba(252, 252, 249, 1);                                                                                          │ │
+│ │   --color-card-border: rgba(94, 82, 64, 0.12);                                                                                               │ │
+│ │   --color-card-border-inner: rgba(94, 82, 64, 0.12);                                                                                         │ │
+│ │   --color-error: rgba(192, 21, 47, 1);                                                                                                       │ │
+│ │   --color-success: rgba(33, 128, 141, 1);                                                                                                    │ │
+│ │   --color-warning: rgba(168, 75, 47, 1);                                                                                                     │ │
+│ │   --color-info: rgba(98, 108, 113, 1);                                                                                                       │ │
+│ │   --color-focus-ring: rgba(33, 128, 141, 0.4);                                                                                               │ │
+│ │                                                                                                                                              │ │
+│ │   /* RGB versions for light mode */                                                                                                          │ │
+│ │   --color-success-rgb: 33, 128, 141;                                                                                                         │ │
+│ │   --color-error-rgb: 192, 21, 47;                                                                                                            │ │
+│ │   --color-warning-rgb: 168, 75, 47;                                                                                                          │ │
+│ │   --color-info-rgb: 98, 108, 113;                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │   --epra-light-bg: #f8f9fa;                                                                                                                  │ │
+│ │   --epra-border: #dee2e6;                                                                                                                    │ │
+│ │   --epra-text-muted: #6c757d;                                                                                                                │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Base styles */                                                                                                                            │ │
+│ │ html {                                                                                                                                       │ │
+│ │   font-size: var(--font-size-base);                                                                                                          │ │
+│ │   font-family: var(--font-family-base);                                                                                                      │ │
+│ │   line-height: var(--line-height-normal);                                                                                                    │ │
+│ │   color: var(--color-text);                                                                                                                  │ │
+│ │   background-color: var(--color-background);                                                                                                 │ │
+│ │   -webkit-font-smoothing: antialiased;                                                                                                       │ │
+│ │   box-sizing: border-box;                                                                                                                    │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ body {                                                                                                                                       │ │
+│ │   margin: 0;                                                                                                                                 │ │
+│ │   padding: 0;                                                                                                                                │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ *,                                                                                                                                           │ │
+│ │ *::before,                                                                                                                                   │ │
+│ │ *::after {                                                                                                                                   │ │
+│ │   box-sizing: inherit;                                                                                                                       │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Typography */                                                                                                                             │ │
+│ │ h1,                                                                                                                                          │ │
+│ │ h2,                                                                                                                                          │ │
+│ │ h3,                                                                                                                                          │ │
+│ │ h4,                                                                                                                                          │ │
+│ │ h5,                                                                                                                                          │ │
+│ │ h6 {                                                                                                                                         │ │
+│ │   margin: 0;                                                                                                                                 │ │
+│ │   font-weight: var(--font-weight-semibold);                                                                                                  │ │
+│ │   line-height: var(--line-height-tight);                                                                                                     │ │
+│ │   color: var(--color-text);                                                                                                                  │ │
+│ │   letter-spacing: var(--letter-spacing-tight);                                                                                               │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ h1 {                                                                                                                                         │ │
+│ │   font-size: var(--font-size-4xl);                                                                                                           │ │
+│ │ }                                                                                                                                            │ │
+│ │ h2 {                                                                                                                                         │ │
+│ │   font-size: var(--font-size-3xl);                                                                                                           │ │
+│ │ }                                                                                                                                            │ │
+│ │ h3 {                                                                                                                                         │ │
+│ │   font-size: var(--font-size-2xl);                                                                                                           │ │
+│ │ }                                                                                                                                            │ │
+│ │ h4 {                                                                                                                                         │ │
+│ │   font-size: var(--font-size-xl);                                                                                                            │ │
+│ │ }                                                                                                                                            │ │
+│ │ h5 {                                                                                                                                         │ │
+│ │   font-size: var(--font-size-lg);                                                                                                            │ │
+│ │ }                                                                                                                                            │ │
+│ │ h6 {                                                                                                                                         │ │
+│ │   font-size: var(--font-size-md);                                                                                                            │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ p {                                                                                                                                          │ │
+│ │   margin: 0 0 var(--space-16) 0;                                                                                                             │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ a {                                                                                                                                          │ │
+│ │   color: var(--color-primary);                                                                                                               │ │
+│ │   text-decoration: none;                                                                                                                     │ │
+│ │   transition: color var(--duration-fast) var(--ease-standard);                                                                               │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ a:hover {                                                                                                                                    │ │
+│ │   color: var(--color-primary-hover);                                                                                                         │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ code,                                                                                                                                        │ │
+│ │ pre {                                                                                                                                        │ │
+│ │   font-family: var(--font-family-mono);                                                                                                      │ │
+│ │   font-size: calc(var(--font-size-base) * 0.95);                                                                                             │ │
+│ │   background-color: var(--color-secondary);                                                                                                  │ │
+│ │   border-radius: var(--radius-sm);                                                                                                           │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ code {                                                                                                                                       │ │
+│ │   padding: var(--space-1) var(--space-4);                                                                                                    │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ pre {                                                                                                                                        │ │
+│ │   padding: var(--space-16);                                                                                                                  │ │
+│ │   margin: var(--space-16) 0;                                                                                                                 │ │
+│ │   overflow: auto;                                                                                                                            │ │
+│ │   border: 1px solid var(--color-border);                                                                                                     │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ pre code {                                                                                                                                   │ │
+│ │   background: none;                                                                                                                          │ │
+│ │   padding: 0;                                                                                                                                │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Form elements */                                                                                                                          │ │
+│ │ .form-control {                                                                                                                              │ │
+│ │   display: block;                                                                                                                            │ │
+│ │   width: 100%;                                                                                                                               │ │
+│ │   padding: var(--space-8) var(--space-12);                                                                                                   │ │
+│ │   font-size: var(--font-size-md);                                                                                                            │ │
+│ │   line-height: 1.5;                                                                                                                          │ │
+│ │   color: var(--color-text);                                                                                                                  │ │
+│ │   background-color: var(--color-surface);                                                                                                    │ │
+│ │   border: 1px solid var(--color-border);                                                                                                     │ │
+│ │   border-radius: var(--radius-base);                                                                                                         │ │
+│ │   transition: border-color var(--duration-fast) var(--ease-standard),                                                                        │ │
+│ │     box-shadow var(--duration-fast) var(--ease-standard);                                                                                    │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ textarea.form-control {                                                                                                                      │ │
+│ │   font-family: var(--font-family-base);                                                                                                      │ │
+│ │   font-size: var(--font-size-base);                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ select.form-control {                                                                                                                        │ │
+│ │   padding: var(--space-8) var(--space-12);                                                                                                   │ │
+│ │   -webkit-appearance: none;                                                                                                                  │ │
+│ │   -moz-appearance: none;                                                                                                                     │ │
+│ │   appearance: none;                                                                                                                          │ │
+│ │   background-image: var(--select-caret-light);                                                                                               │ │
+│ │   background-repeat: no-repeat;                                                                                                              │ │
+│ │   background-position: right var(--space-12) center;                                                                                         │ │
+│ │   background-size: 16px;                                                                                                                     │ │
+│ │   padding-right: var(--space-32);                                                                                                            │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ @media (prefers-color-scheme: dark) {                                                                                                        │ │
+│ │   select.form-control {                                                                                                                      │ │
+│ │     background-image: var(--select-caret-dark);                                                                                              │ │
+│ │   }                                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ [data-color-scheme="dark"] select.form-control {                                                                                             │ │
+│ │   background-image: var(--select-caret-dark);                                                                                                │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ [data-color-scheme="light"] select.form-control {                                                                                            │ │
+│ │   background-image: var(--select-caret-light);                                                                                               │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .form-control:focus {                                                                                                                        │ │
+│ │   border-color: var(--color-primary);                                                                                                        │ │
+│ │   outline: var(--focus-outline);                                                                                                             │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .form-label {                                                                                                                                │ │
+│ │   display: block;                                                                                                                            │ │
+│ │   margin-bottom: var(--space-8);                                                                                                             │ │
+│ │   font-weight: var(--font-weight-medium);                                                                                                    │ │
+│ │   font-size: var(--font-size-sm);                                                                                                            │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .form-group {                                                                                                                                │ │
+│ │   margin-bottom: var(--space-16);                                                                                                            │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Card component */                                                                                                                         │ │
+│ │ .card {                                                                                                                                      │ │
+│ │   background-color: var(--color-surface);                                                                                                    │ │
+│ │   border-radius: var(--radius-lg);                                                                                                           │ │
+│ │   border: 1px solid var(--color-card-border);                                                                                                │ │
+│ │   box-shadow: var(--shadow-sm);                                                                                                              │ │
+│ │   overflow: hidden;                                                                                                                          │ │
+│ │   transition: box-shadow var(--duration-normal) var(--ease-standard);                                                                        │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .card:hover {                                                                                                                                │ │
+│ │   box-shadow: var(--shadow-md);                                                                                                              │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .card__body {                                                                                                                                │ │
+│ │   padding: var(--space-16);                                                                                                                  │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .card__header,                                                                                                                               │ │
+│ │ .card__footer {                                                                                                                              │ │
+│ │   padding: var(--space-16);                                                                                                                  │ │
+│ │   border-bottom: 1px solid var(--color-card-border-inner);                                                                                   │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Status indicators */                                                                                                                      │ │
+│ │ .status {                                                                                                                                    │ │
+│ │   display: inline-flex;                                                                                                                      │ │
+│ │   align-items: center;                                                                                                                       │ │
+│ │   padding: var(--space-6) var(--space-12);                                                                                                   │ │
+│ │   border-radius: var(--radius-full);                                                                                                         │ │
+│ │   font-weight: var(--font-weight-medium);                                                                                                    │ │
+│ │   font-size: var(--font-size-sm);                                                                                                            │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .status--success {                                                                                                                           │ │
+│ │   background-color: rgba(                                                                                                                    │ │
+│ │     var(--color-success-rgb, 33, 128, 141),                                                                                                  │ │
+│ │     var(--status-bg-opacity)                                                                                                                 │ │
+│ │   );                                                                                                                                         │ │
+│ │   color: var(--color-success);                                                                                                               │ │
+│ │   border: 1px solid                                                                                                                          │ │
+│ │     rgba(var(--color-success-rgb, 33, 128, 141), var(--status-border-opacity));                                                              │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .status--error {                                                                                                                             │ │
+│ │   background-color: rgba(                                                                                                                    │ │
+│ │     var(--color-error-rgb, 192, 21, 47),                                                                                                     │ │
+│ │     var(--status-bg-opacity)                                                                                                                 │ │
+│ │   );                                                                                                                                         │ │
+│ │   color: var(--color-error);                                                                                                                 │ │
+│ │   border: 1px solid                                                                                                                          │ │
+│ │     rgba(var(--color-error-rgb, 192, 21, 47), var(--status-border-opacity));                                                                 │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .status--warning {                                                                                                                           │ │
+│ │   background-color: rgba(                                                                                                                    │ │
+│ │     var(--color-warning-rgb, 168, 75, 47),                                                                                                   │ │
+│ │     var(--status-bg-opacity)                                                                                                                 │ │
+│ │   );                                                                                                                                         │ │
+│ │   color: var(--color-warning);                                                                                                               │ │
+│ │   border: 1px solid                                                                                                                          │ │
+│ │     rgba(var(--color-warning-rgb, 168, 75, 47), var(--status-border-opacity));                                                               │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .status--info {                                                                                                                              │ │
+│ │   background-color: rgba(                                                                                                                    │ │
+│ │     var(--color-info-rgb, 98, 108, 113),                                                                                                     │ │
+│ │     var(--status-bg-opacity)                                                                                                                 │ │
+│ │   );                                                                                                                                         │ │
+│ │   color: var(--color-info);                                                                                                                  │ │
+│ │   border: 1px solid                                                                                                                          │ │
+│ │     rgba(var(--color-info-rgb, 98, 108, 113), var(--status-border-opacity));                                                                 │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Container layout */                                                                                                                       │ │
+│ │ .container {                                                                                                                                 │ │
+│ │   width: 100%;                                                                                                                               │ │
+│ │   margin-right: auto;                                                                                                                        │ │
+│ │   margin-left: auto;                                                                                                                         │ │
+│ │   padding-right: var(--space-16);                                                                                                            │ │
+│ │   padding-left: var(--space-16);                                                                                                             │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ @media (min-width: 640px) {                                                                                                                  │ │
+│ │   .container {                                                                                                                               │ │
+│ │     max-width: var(--container-sm);                                                                                                          │ │
+│ │   }                                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │ @media (min-width: 768px) {                                                                                                                  │ │
+│ │   .container {                                                                                                                               │ │
+│ │     max-width: var(--container-md);                                                                                                          │ │
+│ │   }                                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │ @media (min-width: 1024px) {                                                                                                                 │ │
+│ │   .container {                                                                                                                               │ │
+│ │     max-width: var(--container-lg);                                                                                                          │ │
+│ │   }                                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │ @media (min-width: 1280px) {                                                                                                                 │ │
+│ │   .container {                                                                                                                               │ │
+│ │     max-width: var(--container-xl);                                                                                                          │ │
+│ │   }                                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Accessibility */                                                                                                                          │ │
+│ │ .sr-only {                                                                                                                                   │ │
+│ │   position: absolute;                                                                                                                        │ │
+│ │   width: 1px;                                                                                                                                │ │
+│ │   height: 1px;                                                                                                                               │ │
+│ │   padding: 0;                                                                                                                                │ │
+│ │   margin: -1px;                                                                                                                              │ │
+│ │   overflow: hidden;                                                                                                                          │ │
+│ │   clip: rect(0, 0, 0, 0);                                                                                                                    │ │
+│ │   white-space: nowrap;                                                                                                                       │ │
+│ │   border-width: 0;                                                                                                                           │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ :focus-visible {                                                                                                                             │ │
+│ │   outline: var(--focus-outline);                                                                                                             │ │
+│ │   outline-offset: 2px;                                                                                                                       │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Dark mode specifics */                                                                                                                    │ │
+│ │ [data-color-scheme="dark"] .btn--outline {                                                                                                   │ │
+│ │   border: 1px solid var(--color-border-secondary);                                                                                           │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ @font-face {                                                                                                                                 │ │
+│ │   font-family: 'FKGroteskNeue';                                                                                                              │ │
+│ │   src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2')                                                                          │ │
+│ │     format('woff2');                                                                                                                         │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Demo banner styling */                                                                                                                    │ │
+│ │ #demoBanner {                                                                                                                                │ │
+│ │   border-left: 4px solid var(--epra-blue);                                                                                                   │ │
+│ │   background: linear-gradient(135deg, rgba(31, 184, 205, 0.1) 0%, rgba(46, 204, 113, 0.1) 100%);                                             │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Enhanced citation superscripts */                                                                                                         │ │
+│ │ .citation-sup {                                                                                                                              │ │
+│ │   cursor: pointer;                                                                                                                           │ │
+│ │   font-size: 0.7em;                                                                                                                          │ │
+│ │   vertical-align: super;                                                                                                                     │ │
+│ │   margin-left: 3px;                                                                                                                          │ │
+│ │   margin-right: 1px;                                                                                                                         │ │
+│ │   user-select: none;                                                                                                                         │ │
+│ │   font-weight: 700;                                                                                                                          │ │
+│ │   padding: 1px 4px;                                                                                                                          │ │
+│ │   border-radius: 3px;                                                                                                                        │ │
+│ │   transition: all 0.2s ease;                                                                                                                 │ │
+│ │   line-height: 1;                                                                                                                            │ │
+│ │   display: inline-block;                                                                                                                     │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .citation-sup:hover {                                                                                                                        │ │
+│ │   transform: translateY(-1px);                                                                                                               │ │
+│ │   box-shadow: 0 2px 4px rgba(0,0,0,0.1);                                                                                                     │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .citation-core {                                                                                                                             │ │
+│ │   color: var(--epra-blue);                                                                                                                   │ │
+│ │   background: rgba(31, 184, 205, 0.1);                                                                                                       │ │
+│ │   border: 1px solid rgba(31, 184, 205, 0.3);                                                                                                 │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .citation-standard {                                                                                                                         │ │
+│ │   color: var(--epra-green);                                                                                                                  │ │
+│ │   background: rgba(46, 204, 113, 0.1);                                                                                                       │ │
+│ │   border: 1px solid rgba(46, 204, 113, 0.3);                                                                                                 │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .citation-guidance {                                                                                                                         │ │
+│ │   color: var(--epra-purple);                                                                                                                 │ │
+│ │   background: rgba(155, 89, 182, 0.1);                                                                                                       │ │
+│ │   border: 1px solid rgba(155, 89, 182, 0.3);                                                                                                 │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Enhanced loading animations */                                                                                                            │ │
+│ │ @keyframes epra-spin {                                                                                                                       │ │
+│ │   0% { transform: rotate(0deg); }                                                                                                            │ │
+│ │   100% { transform: rotate(360deg); }                                                                                                        │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ @keyframes epra-pulse {                                                                                                                      │ │
+│ │   0%, 100% { opacity: 1; }                                                                                                                   │ │
+│ │   50% { opacity: 0.5; }                                                                                                                      │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ @keyframes epra-dots {                                                                                                                       │ │
+│ │   0%, 20% { content: '.'; }                                                                                                                  │ │
+│ │   40% { content: '..'; }                                                                                                                     │ │
+│ │   60%, 100% { content: '...'; }                                                                                                              │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .spinner {                                                                                                                                   │ │
+│ │   width: 1.2rem;                                                                                                                             │ │
+│ │   height: 1.2rem;                                                                                                                            │ │
+│ │   border: 2px solid var(--color-secondary);                                                                                                  │ │
+│ │   border-top-color: var(--color-primary);                                                                                                    │ │
+│ │   border-radius: 50%;                                                                                                                        │ │
+│ │   animation: epra-spin 0.8s linear infinite;                                                                                                 │ │
+│ │   display: inline-block;                                                                                                                     │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .spinner-lg {                                                                                                                                │ │
+│ │   width: 2rem;                                                                                                                               │ │
+│ │   height: 2rem;                                                                                                                              │ │
+│ │   border-width: 3px;                                                                                                                         │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .thinking-indicator::after {                                                                                                                 │ │
+│ │   content: '';                                                                                                                               │ │
+│ │   animation: epra-dots 1.5s infinite;                                                                                                        │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Enhanced chat styling */                                                                                                                  │ │
+│ │ .chat-container {                                                                                                                            │ │
+│ │   background: var(--color-surface);                                                                                                          │ │
+│ │   border: 1px solid var(--color-border);                                                                                                     │ │
+│ │   border-radius: var(--radius-lg);                                                                                                           │ │
+│ │   box-shadow: var(--shadow-sm);                                                                                                              │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .chat-messages {                                                                                                                             │ │
+│ │   background: var(--epra-light-bg);                                                                                                          │ │
+│ │   border-radius: var(--radius-base);                                                                                                         │ │
+│ │   max-height: 500px;                                                                                                                         │ │
+│ │   overflow-y: auto;                                                                                                                          │ │
+│ │   padding: var(--space-16);                                                                                                                  │ │
+│ │   scroll-behavior: smooth;                                                                                                                   │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .chat-msg {                                                                                                                                  │ │
+│ │   padding: var(--space-12) var(--space-16);                                                                                                  │ │
+│ │   border-radius: var(--radius-base);                                                                                                         │ │
+│ │   margin-bottom: var(--space-12);                                                                                                            │ │
+│ │   box-shadow: var(--shadow-xs);                                                                                                              │ │
+│ │   position: relative;                                                                                                                        │ │
+│ │   animation: slideIn 0.3s ease-out;                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ @keyframes slideIn {                                                                                                                         │ │
+│ │   from {                                                                                                                                     │ │
+│ │     opacity: 0;                                                                                                                              │ │
+│ │     transform: translateY(10px);                                                                                                             │ │
+│ │   }                                                                                                                                          │ │
+│ │   to {                                                                                                                                       │ │
+│ │     opacity: 1;                                                                                                                              │ │
+│ │     transform: translateY(0);                                                                                                                │ │
+│ │   }                                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .chat-msg.user {                                                                                                                             │ │
+│ │   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);                                             │ │
+│ │   color: var(--color-btn-primary-text);                                                                                                      │ │
+│ │   align-self: flex-end;                                                                                                                      │ │
+│ │   margin-left: 20%;                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .chat-msg.ai {                                                                                                                               │ │
+│ │   background: var(--color-surface);                                                                                                          │ │
+│ │   border: 1px solid var(--color-border);                                                                                                     │ │
+│ │   margin-right: 20%;                                                                                                                         │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .chat-msg.ai .markdown-content {                                                                                                             │ │
+│ │   line-height: 1.6;                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .chat-msg.ai .markdown-content h1,                                                                                                           │ │
+│ │ .chat-msg.ai .markdown-content h2,                                                                                                           │ │
+│ │ .chat-msg.ai .markdown-content h3 {                                                                                                          │ │
+│ │   margin-top: var(--space-16);                                                                                                               │ │
+│ │   margin-bottom: var(--space-8);                                                                                                             │ │
+│ │   color: var(--color-text);                                                                                                                  │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .chat-msg.ai .markdown-content ul,                                                                                                           │ │
+│ │ .chat-msg.ai .markdown-content ol {                                                                                                          │ │
+│ │   margin: var(--space-8) 0;                                                                                                                  │ │
+│ │   padding-left: var(--space-20);                                                                                                             │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .chat-msg.ai .markdown-content li {                                                                                                          │ │
+│ │   margin-bottom: var(--space-4);                                                                                                             │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .chat-msg.ai .markdown-content code {                                                                                                        │ │
+│ │   background: var(--color-secondary);                                                                                                        │ │
+│ │   padding: 2px 4px;                                                                                                                          │ │
+│ │   border-radius: 3px;                                                                                                                        │ │
+│ │   font-size: 0.9em;                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .chat-msg.ai .markdown-content pre {                                                                                                         │ │
+│ │   background: var(--color-secondary);                                                                                                        │ │
+│ │   padding: var(--space-12);                                                                                                                  │ │
+│ │   border-radius: var(--radius-sm);                                                                                                           │ │
+│ │   overflow-x: auto;                                                                                                                          │ │
+│ │   margin: var(--space-8) 0;                                                                                                                  │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Enhanced input styling */                                                                                                                 │ │
+│ │ .chat-input-container {                                                                                                                      │ │
+│ │   background: var(--color-surface);                                                                                                          │ │
+│ │   border: 1px solid var(--color-border);                                                                                                     │ │
+│ │   border-radius: var(--radius-base);                                                                                                         │ │
+│ │   padding: var(--space-8);                                                                                                                   │ │
+│ │   transition: border-color 0.2s ease;                                                                                                        │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .chat-input-container:focus-within {                                                                                                         │ │
+│ │   border-color: var(--color-primary);                                                                                                        │ │
+│ │   box-shadow: 0 0 0 3px rgba(31, 184, 205, 0.1);                                                                                             │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .chat-input {                                                                                                                                │ │
+│ │   border: none;                                                                                                                              │ │
+│ │   outline: none;                                                                                                                             │ │
+│ │   resize: vertical;                                                                                                                          │ │
+│ │   min-height: 60px;                                                                                                                          │ │
+│ │   font-family: inherit;                                                                                                                      │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .chat-input::placeholder {                                                                                                                   │ │
+│ │   color: var(--epra-text-muted);                                                                                                             │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Enhanced Learning Module Styling */                                                                                                       │ │
+│ │ .learning-module-card {                                                                                                                      │ │
+│ │   background: var(--color-surface);                                                                                                          │ │
+│ │   border: 1px solid var(--color-border);                                                                                                     │ │
+│ │   border-radius: var(--radius-lg);                                                                                                           │ │
+│ │   padding: var(--space-20);                                                                                                                  │ │
+│ │   margin-bottom: var(--space-16);                                                                                                            │ │
+│ │   transition: all 0.3s ease;                                                                                                                 │ │
+│ │   position: relative;                                                                                                                        │ │
+│ │   overflow: hidden;                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .learning-module-card::before {                                                                                                              │ │
+│ │   content: '';                                                                                                                               │ │
+│ │   position: absolute;                                                                                                                        │ │
+│ │   top: 0;                                                                                                                                    │ │
+│ │   left: 0;                                                                                                                                   │ │
+│ │   right: 0;                                                                                                                                  │ │
+│ │   height: 4px;                                                                                                                               │ │
+│ │   background: linear-gradient(90deg, var(--epra-purple) 0%, var(--epra-blue) 100%);                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .learning-module-card:hover {                                                                                                                │ │
+│ │   transform: translateY(-2px);                                                                                                               │ │
+│ │   box-shadow: var(--shadow-md);                                                                                                              │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .learning-module-card.completed::before {                                                                                                    │ │
+│ │   background: linear-gradient(90deg, var(--epra-green) 0%, var(--epra-success) 100%);                                                        │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .learning-progress {                                                                                                                         │ │
+│ │   background: var(--epra-light-bg);                                                                                                          │ │
+│ │   border-radius: var(--radius-full);                                                                                                         │ │
+│ │   overflow: hidden;                                                                                                                          │ │
+│ │   height: 8px;                                                                                                                               │ │
+│ │   margin-bottom: var(--space-16);                                                                                                            │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .learning-progress-bar {                                                                                                                     │ │
+│ │   background: linear-gradient(90deg, var(--epra-blue) 0%, var(--epra-green) 100%);                                                           │ │
+│ │   height: 100%;                                                                                                                              │ │
+│ │   transition: width 0.5s ease;                                                                                                               │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .question-card {                                                                                                                             │ │
+│ │   background: var(--color-surface);                                                                                                          │ │
+│ │   border: 1px solid var(--color-border);                                                                                                     │ │
+│ │   border-radius: var(--radius-lg);                                                                                                           │ │
+│ │   padding: var(--space-24);                                                                                                                  │ │
+│ │   box-shadow: var(--shadow-sm);                                                                                                              │ │
+│ │   transition: all 0.3s ease;                                                                                                                 │ │
+│ │   margin-bottom: var(--space-16);                                                                                                            │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .question-card:hover {                                                                                                                       │ │
+│ │   box-shadow: var(--shadow-md);                                                                                                              │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .question-card .card-header {                                                                                                                │ │
+│ │   background: var(--epra-light-bg);                                                                                                          │ │
+│ │   border-bottom: 1px solid var(--color-border);                                                                                              │ │
+│ │   margin: calc(-1 * var(--space-24)) calc(-1 * var(--space-24)) var(--space-16) calc(-1 * var(--space-24));                                  │ │
+│ │   padding: var(--space-16) var(--space-24);                                                                                                  │ │
+│ │   border-radius: var(--radius-lg) var(--radius-lg) 0 0;                                                                                      │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .answer-option {                                                                                                                             │ │
+│ │   background: var(--color-surface);                                                                                                          │ │
+│ │   border: 2px solid var(--color-border);                                                                                                     │ │
+│ │   border-radius: var(--radius-base);                                                                                                         │ │
+│ │   padding: var(--space-12) var(--space-16);                                                                                                  │ │
+│ │   margin-bottom: var(--space-8);                                                                                                             │ │
+│ │   cursor: pointer;                                                                                                                           │ │
+│ │   transition: all 0.2s ease;                                                                                                                 │ │
+│ │   text-align: left;                                                                                                                          │ │
+│ │   width: 100%;                                                                                                                               │ │
+│ │   font-size: var(--font-size-base);                                                                                                          │ │
+│ │   line-height: 1.5;                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .answer-option:hover:not(:disabled) {                                                                                                        │ │
+│ │   border-color: var(--epra-blue);                                                                                                            │ │
+│ │   background: rgba(31, 184, 205, 0.05);                                                                                                      │ │
+│ │   transform: translateY(-1px);                                                                                                               │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .answer-option.correct {                                                                                                                     │ │
+│ │   border-color: var(--epra-green);                                                                                                           │ │
+│ │   background: rgba(46, 204, 113, 0.1);                                                                                                       │ │
+│ │   color: var(--epra-green);                                                                                                                  │ │
+│ │   font-weight: 600;                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .answer-option.incorrect {                                                                                                                   │ │
+│ │   border-color: var(--epra-red);                                                                                                             │ │
+│ │   background: rgba(231, 76, 60, 0.1);                                                                                                        │ │
+│ │   color: var(--epra-red);                                                                                                                    │ │
+│ │   font-weight: 600;                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .answer-option:disabled {                                                                                                                    │ │
+│ │   cursor: not-allowed;                                                                                                                       │ │
+│ │   opacity: 0.7;                                                                                                                              │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Module difficulty badges */                                                                                                               │ │
+│ │ .difficulty-badge {                                                                                                                          │ │
+│ │   padding: 4px 8px;                                                                                                                          │ │
+│ │   border-radius: 12px;                                                                                                                       │ │
+│ │   font-size: 0.75em;                                                                                                                         │ │
+│ │   font-weight: 600;                                                                                                                          │ │
+│ │   text-transform: uppercase;                                                                                                                 │ │
+│ │   letter-spacing: 0.5px;                                                                                                                     │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .difficulty-beginner {                                                                                                                       │ │
+│ │   background: rgba(46, 204, 113, 0.1);                                                                                                       │ │
+│ │   color: var(--epra-green);                                                                                                                  │ │
+│ │   border: 1px solid rgba(46, 204, 113, 0.3);                                                                                                 │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .difficulty-intermediate {                                                                                                                   │ │
+│ │   background: rgba(243, 156, 18, 0.1);                                                                                                       │ │
+│ │   color: var(--epra-orange);                                                                                                                 │ │
+│ │   border: 1px solid rgba(243, 156, 18, 0.3);                                                                                                 │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .difficulty-advanced {                                                                                                                       │ │
+│ │   background: rgba(231, 76, 60, 0.1);                                                                                                        │ │
+│ │   color: var(--epra-red);                                                                                                                    │ │
+│ │   border: 1px solid rgba(231, 76, 60, 0.3);                                                                                                  │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Module completion certificate */                                                                                                          │ │
+│ │ .completion-certificate {                                                                                                                    │ │
+│ │   background: linear-gradient(135deg, var(--epra-blue) 0%, var(--epra-green) 100%);                                                          │ │
+│ │   color: white;                                                                                                                              │ │
+│ │   padding: var(--space-32);                                                                                                                  │ │
+│ │   border-radius: var(--radius-lg);                                                                                                           │ │
+│ │   text-align: center;                                                                                                                        │ │
+│ │   margin: var(--space-24) 0;                                                                                                                 │ │
+│ │   position: relative;                                                                                                                        │ │
+│ │   overflow: hidden;                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .completion-certificate::before {                                                                                                            │ │
+│ │   content: '';                                                                                                                               │ │
+│ │   position: absolute;                                                                                                                        │ │
+│ │   top: -50%;                                                                                                                                 │ │
+│ │   left: -50%;                                                                                                                                │ │
+│ │   width: 200%;                                                                                                                               │ │
+│ │   height: 200%;                                                                                                                              │ │
+│ │   background: repeating-linear-gradient(                                                                                                     │ │
+│ │     45deg,                                                                                                                                   │ │
+│ │     transparent,                                                                                                                             │ │
+│ │     transparent 10px,                                                                                                                        │ │
+│ │     rgba(255, 255, 255, 0.1) 10px,                                                                                                           │ │
+│ │     rgba(255, 255, 255, 0.1) 20px                                                                                                            │ │
+│ │   );                                                                                                                                         │ │
+│ │   animation: shimmer 3s linear infinite;                                                                                                     │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ @keyframes shimmer {                                                                                                                         │ │
+│ │   0% { transform: translateX(-100%); }                                                                                                       │ │
+│ │   100% { transform: translateX(100%); }                                                                                                      │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .completion-score {                                                                                                                          │ │
+│ │   font-size: 3rem;                                                                                                                           │ │
+│ │   font-weight: 700;                                                                                                                          │ │
+│ │   margin: var(--space-16) 0;                                                                                                                 │ │
+│ │   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);                                                                                                 │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* List group enhancements for learning modules */                                                                                           │ │
+│ │ .list-group-item {                                                                                                                           │ │
+│ │   border: 1px solid var(--color-border);                                                                                                     │ │
+│ │   background: var(--color-surface);                                                                                                          │ │
+│ │   transition: all 0.2s ease;                                                                                                                 │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .list-group-item:hover {                                                                                                                     │ │
+│ │   background: var(--color-secondary);                                                                                                        │ │
+│ │   transform: translateX(2px);                                                                                                                │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .list-group-item.active {                                                                                                                    │ │
+│ │   background: var(--epra-blue);                                                                                                              │ │
+│ │   border-color: var(--epra-blue);                                                                                                            │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .list-group-item .progress {                                                                                                                 │ │
+│ │   background: var(--epra-light-bg);                                                                                                          │ │
+│ │   border-radius: var(--radius-full);                                                                                                         │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .list-group-item .progress-bar {                                                                                                             │ │
+│ │   background: linear-gradient(90deg, var(--epra-blue) 0%, var(--epra-green) 100%);                                                           │ │
+│ │   transition: width 0.5s ease;                                                                                                               │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Enhanced button styling */                                                                                                                │ │
+│ │ .btn-primary {                                                                                                                               │ │
+│ │   background: linear-gradient(135deg, var(--epra-blue) 0%, var(--epra-green) 100%);                                                          │ │
+│ │   border: none;                                                                                                                              │ │
+│ │   font-weight: 500;                                                                                                                          │ │
+│ │   transition: all 0.3s ease;                                                                                                                 │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .btn-primary:hover {                                                                                                                         │ │
+│ │   transform: translateY(-1px);                                                                                                               │ │
+│ │   box-shadow: 0 4px 12px rgba(31, 184, 205, 0.3);                                                                                            │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .btn-primary:active {                                                                                                                        │ │
+│ │   transform: translateY(0);                                                                                                                  │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .btn-outline-primary {                                                                                                                       │ │
+│ │   border-color: var(--epra-blue);                                                                                                            │ │
+│ │   color: var(--epra-blue);                                                                                                                   │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .btn-outline-primary:hover {                                                                                                                 │ │
+│ │   background: var(--epra-blue);                                                                                                              │ │
+│ │   border-color: var(--epra-blue);                                                                                                            │ │
+│ │   color: white;                                                                                                                              │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Enhanced form styling */                                                                                                                  │ │
+│ │ .form-control:focus {                                                                                                                        │ │
+│ │   border-color: var(--epra-blue);                                                                                                            │ │
+│ │   box-shadow: 0 0 0 0.25rem rgba(31, 184, 205, 0.25);                                                                                        │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .form-select:focus {                                                                                                                         │ │
+│ │   border-color: var(--epra-blue);                                                                                                            │ │
+│ │   box-shadow: 0 0 0 0.25rem rgba(31, 184, 205, 0.25);                                                                                        │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Enhanced offcanvas styling */                                                                                                             │ │
+│ │ .offcanvas {                                                                                                                                 │ │
+│ │   background: var(--color-surface);                                                                                                          │ │
+│ │   border-left: 1px solid var(--color-border);                                                                                                │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .offcanvas-header {                                                                                                                          │ │
+│ │   background: var(--epra-light-bg);                                                                                                          │ │
+│ │   border-bottom: 1px solid var(--color-border);                                                                                              │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .offcanvas-body {                                                                                                                            │ │
+│ │   font-family: var(--font-family-mono);                                                                                                      │ │
+│ │   font-size: 0.9em;                                                                                                                          │ │
+│ │   line-height: 1.6;                                                                                                                          │ │
+│ │   white-space: pre-wrap;                                                                                                                     │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Learning module specific animations */                                                                                                    │ │
+│ │ @keyframes moduleComplete {                                                                                                                  │ │
+│ │   0% {                                                                                                                                       │ │
+│ │     transform: scale(0.8);                                                                                                                   │ │
+│ │     opacity: 0;                                                                                                                              │ │
+│ │   }                                                                                                                                          │ │
+│ │   50% {                                                                                                                                      │ │
+│ │     transform: scale(1.05);                                                                                                                  │ │
+│ │   }                                                                                                                                          │ │
+│ │   100% {                                                                                                                                     │ │
+│ │     transform: scale(1);                                                                                                                     │ │
+│ │     opacity: 1;                                                                                                                              │ │
+│ │   }                                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .module-complete-animation {                                                                                                                 │ │
+│ │   animation: moduleComplete 0.6s ease-out;                                                                                                   │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ @keyframes correctAnswer {                                                                                                                   │ │
+│ │   0% {                                                                                                                                       │ │
+│ │     background: rgba(46, 204, 113, 0.1);                                                                                                     │ │
+│ │   }                                                                                                                                          │ │
+│ │   50% {                                                                                                                                      │ │
+│ │     background: rgba(46, 204, 113, 0.3);                                                                                                     │ │
+│ │   }                                                                                                                                          │ │
+│ │   100% {                                                                                                                                     │ │
+│ │     background: rgba(46, 204, 113, 0.1);                                                                                                     │ │
+│ │   }                                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .answer-correct-animation {                                                                                                                  │ │
+│ │   animation: correctAnswer 0.8s ease-out;                                                                                                    │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ @keyframes incorrectAnswer {                                                                                                                 │ │
+│ │   0% {                                                                                                                                       │ │
+│ │     background: rgba(231, 76, 60, 0.1);                                                                                                      │ │
+│ │   }                                                                                                                                          │ │
+│ │   50% {                                                                                                                                      │ │
+│ │     background: rgba(231, 76, 60, 0.3);                                                                                                      │ │
+│ │   }                                                                                                                                          │ │
+│ │   100% {                                                                                                                                     │ │
+│ │     background: rgba(231, 76, 60, 0.1);                                                                                                      │ │
+│ │   }                                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .answer-incorrect-animation {                                                                                                                │ │
+│ │   animation: incorrectAnswer 0.8s ease-out;                                                                                                  │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Enhanced alerts */                                                                                                                        │ │
+│ │ .alert {                                                                                                                                     │ │
+│ │   border-radius: var(--radius-base);                                                                                                         │ │
+│ │   border: none;                                                                                                                              │ │
+│ │   padding: var(--space-16);                                                                                                                  │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .alert-success {                                                                                                                             │ │
+│ │   background: rgba(46, 204, 113, 0.1);                                                                                                       │ │
+│ │   color: var(--epra-green);                                                                                                                  │ │
+│ │   border-left: 4px solid var(--epra-green);                                                                                                  │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .alert-info {                                                                                                                                │ │
+│ │   background: rgba(52, 152, 219, 0.1);                                                                                                       │ │
+│ │   color: var(--epra-info);                                                                                                                   │ │
+│ │   border-left: 4px solid var(--epra-info);                                                                                                   │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .alert-warning {                                                                                                                             │ │
+│ │   background: rgba(243, 156, 18, 0.1);                                                                                                       │ │
+│ │   color: var(--epra-orange);                                                                                                                 │ │
+│ │   border-left: 4px solid var(--epra-orange);                                                                                                 │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .alert-danger {                                                                                                                              │ │
+│ │   background: rgba(231, 76, 60, 0.1);                                                                                                        │ │
+│ │   color: var(--epra-red);                                                                                                                    │ │
+│ │   border-left: 4px solid var(--epra-red);                                                                                                    │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Enhanced card headers */                                                                                                                  │ │
+│ │ .card-header {                                                                                                                               │ │
+│ │   background: var(--epra-light-bg);                                                                                                          │ │
+│ │   border-bottom: 1px solid var(--color-border);                                                                                              │ │
+│ │   font-weight: 600;                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .card-header h5 {                                                                                                                            │ │
+│ │   margin: 0;                                                                                                                                 │ │
+│ │   color: var(--epra-dark-blue);                                                                                                              │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Trophy and achievement icons */                                                                                                           │ │
+│ │ .trophy-icon {                                                                                                                               │ │
+│ │   color: var(--epra-warning);                                                                                                                │ │
+│ │   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));                                                                                         │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .achievement-badge {                                                                                                                         │ │
+│ │   background: linear-gradient(135deg, var(--epra-warning) 0%, var(--epra-orange) 100%);                                                      │ │
+│ │   color: white;                                                                                                                              │ │
+│ │   padding: 8px 16px;                                                                                                                         │ │
+│ │   border-radius: 20px;                                                                                                                       │ │
+│ │   font-weight: 600;                                                                                                                          │ │
+│ │   text-transform: uppercase;                                                                                                                 │ │
+│ │   letter-spacing: 0.5px;                                                                                                                     │ │
+│ │   font-size: 0.8em;                                                                                                                          │ │
+│ │   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);                                                                                                  │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Custom scrollbar */                                                                                                                       │ │
+│ │ .chat-messages::-webkit-scrollbar {                                                                                                          │ │
+│ │   width: 6px;                                                                                                                                │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .chat-messages::-webkit-scrollbar-track {                                                                                                    │ │
+│ │   background: var(--epra-light-bg);                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .chat-messages::-webkit-scrollbar-thumb {                                                                                                    │ │
+│ │   background: var(--epra-blue);                                                                                                              │ │
+│ │   border-radius: 3px;                                                                                                                        │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .chat-messages::-webkit-scrollbar-thumb:hover {                                                                                              │ │
+│ │   background: var(--color-primary-hover);                                                                                                    │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .list-group::-webkit-scrollbar {                                                                                                             │ │
+│ │   width: 4px;                                                                                                                                │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .list-group::-webkit-scrollbar-track {                                                                                                       │ │
+│ │   background: var(--epra-light-bg);                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .list-group::-webkit-scrollbar-thumb {                                                                                                       │ │
+│ │   background: var(--epra-blue);                                                                                                              │ │
+│ │   border-radius: 2px;                                                                                                                        │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Enhanced responsive design */                                                                                                             │ │
+│ │ @media (max-width: 768px) {                                                                                                                  │ │
+│ │   .chat-msg.user {                                                                                                                           │ │
+│ │     margin-left: 10%;                                                                                                                        │ │
+│ │   }                                                                                                                                          │ │
+│ │                                                                                                                                              │ │
+│ │   .chat-msg.ai {                                                                                                                             │ │
+│ │     margin-right: 10%;                                                                                                                       │ │
+│ │   }                                                                                                                                          │ │
+│ │                                                                                                                                              │ │
+│ │   .learning-module-card {                                                                                                                    │ │
+│ │     padding: var(--space-16);                                                                                                                │ │
+│ │   }                                                                                                                                          │ │
+│ │                                                                                                                                              │ │
+│ │   .question-card {                                                                                                                           │ │
+│ │     padding: var(--space-16);                                                                                                                │ │
+│ │   }                                                                                                                                          │ │
+│ │                                                                                                                                              │ │
+│ │   .completion-certificate {                                                                                                                  │ │
+│ │     padding: var(--space-20);                                                                                                                │ │
+│ │   }                                                                                                                                          │ │
+│ │                                                                                                                                              │ │
+│ │   .completion-score {                                                                                                                        │ │
+│ │     font-size: 2rem;                                                                                                                         │ │
+│ │   }                                                                                                                                          │ │
+│ │                                                                                                                                              │ │
+│ │   .col-md-4, .col-md-8 {                                                                                                                     │ │
+│ │     margin-bottom: var(--space-16);                                                                                                          │ │
+│ │   }                                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Animation utilities */                                                                                                                    │ │
+│ │ .fade-in {                                                                                                                                   │ │
+│ │   animation: fadeIn 0.5s ease-out;                                                                                                           │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ @keyframes fadeIn {                                                                                                                          │ │
+│ │   from { opacity: 0; }                                                                                                                       │ │
+│ │   to { opacity: 1; }                                                                                                                         │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .slide-up {                                                                                                                                  │ │
+│ │   animation: slideUp 0.3s ease-out;                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ @keyframes slideUp {                                                                                                                         │ │
+│ │   from {                                                                                                                                     │ │
+│ │     opacity: 0;                                                                                                                              │ │
+│ │     transform: translateY(20px);                                                                                                             │ │
+│ │   }                                                                                                                                          │ │
+│ │   to {                                                                                                                                       │ │
+│ │     opacity: 1;                                                                                                                              │ │
+│ │     transform: translateY(0);                                                                                                                │ │
+│ │   }                                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ .bounce-in {                                                                                                                                 │ │
+│ │   animation: bounceIn 0.6s ease-out;                                                                                                         │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ @keyframes bounceIn {                                                                                                                        │ │
+│ │   0% {                                                                                                                                       │ │
+│ │     transform: scale(0.3);                                                                                                                   │ │
+│ │     opacity: 0;                                                                                                                              │ │
+│ │   }                                                                                                                                          │ │
+│ │   50% {                                                                                                                                      │ │
+│ │     transform: scale(1.05);                                                                                                                  │ │
+│ │   }                                                                                                                                          │ │
+│ │   70% {                                                                                                                                      │ │
+│ │     transform: scale(0.9);                                                                                                                   │ │
+│ │   }                                                                                                                                          │ │
+│ │   100% {                                                                                                                                     │ │
+│ │     transform: scale(1);                                                                                                                     │ │
+│ │     opacity: 1;                                                                                                                              │ │
+│ │   }                                                                                                                                          │ │
+│ │ }                                                                                                                                            │ │
+│ │                                                                                                                                              │ │
+│ │ /* Print styles */                                                                                                                           │ │
+│ │ @media print {                                                                                                                               │ │
+│ │   .navbar,                                                                                                                                   │ │
+│ │   .offcanvas,                                                                                                                                │ │
+│ │   .modal,                                                                                                                                    │ │
+│ │   #demoBanner,                                                                                                                               │ │
+│ │   .btn,                                                                                                                                      │ │
+│ │   .chat-input-container {                                                                                                                    │ │
+│ │     display: none !important;                                                                                                                │ │
+│ │   }                                                                                                                                          │ │
+│ │                                                                                                                                              │ │
+│ │   .chat-msg {                                                                                                                                │ │
+│ │     break-inside: avoid;                                                                                                                     │ │
+│ │     box-shadow: none;                                                                                                                        │ │
+│ │     border: 1px solid #ddd;                                                                                                                  │ │
+│ │   }                                                                                                                                          │ │
+│ │                                                                                                                                              │ │
+│ │   .learning-module-card {                                                                                                                    │ │
+│ │     break-inside: avoid;                                                                                                                     │ │
+│ │     box-shadow: none;                                                                                                                        │ │
+│ │     border: 1px solid #ddd;                                                                                                                  │ │
+│ │   }                                                                                                                                          │ │
+│ │                                                                                                                                              │ │
+│ │   .question-card {                                                                                                                           │ │
+│ │     break-inside: avoid;                                                                                                                     │ │
+│ │     box-shadow: none;                                                                                                                        │ │
+│ │     border: 1px solid #ddd;                                                                                                                  │ │
+│ │   }                                                                                                                                          │ │
+│ │ }                                          

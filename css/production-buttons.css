@@ -1,0 +1,180 @@
+/*
+  Production Button Styling - Clean & Professional
+  ===============================================
+  Final production-ready button styling
+*/
+
+/* Ensure FontAwesome loads properly */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+
+/* Settings Button */
+#settingsBtn {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: white !important;
+  padding: 0.5rem !important;
+  border-radius: 0.375rem !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s ease !important;
+  position: relative !important;
+  cursor: pointer !important;
+}
+
+#settingsBtn:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  color: white !important;
+  transform: translateY(-1px) !important;
+}
+
+#settingsBtn:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Settings icon - clean single icon */
+#settingsBtn i {
+  color: white !important;
+  font-size: 1rem !important;
+  display: block !important;
+}
+
+/* Dark Mode Toggle */
+#darkToggle {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: white !important;
+  padding: 0.5rem !important;
+  border-radius: 0.375rem !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s ease !important;
+  position: relative !important;
+  cursor: pointer !important;
+}
+
+#darkToggle:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  color: white !important;
+  transform: translateY(-1px) !important;
+}
+
+#darkToggle:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Dark mode icon with fallback */
+#darkToggle i {
+  color: white !important;
+  font-size: 1rem !important;
+  display: block !important;
+}
+
+/* FontAwesome icons load automatically, no manual content needed */
+
+/* Language Selector */
+#langSelect {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: white !important;
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 0.375rem !important;
+  font-size: 0.875rem !important;
+  min-width: 80px !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+}
+
+#langSelect:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+#langSelect:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  color: white !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25) !important;
+  outline: none !important;
+}
+
+#langSelect option {
+  background: #1d4ed8 !important;
+  color: white !important;
+}
+
+/* Right-side button container */
+.navbar .d-flex {
+  gap: 0.75rem !important;
+  align-items: center !important;
+}
+
+/* Ensure all buttons are clickable */
+#settingsBtn, #darkToggle, #langSelect {
+  pointer-events: auto !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 991.98px) {
+  .navbar .d-flex {
+    margin-top: 1rem !important;
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+  }
+
+  #settingsBtn,
+  #darkToggle {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  #langSelect {
+    min-width: 100px !important;
+  }
+}
+
+/* Typing indicator animation */
+.typing-indicator {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.typing-indicator span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #6c757d;
+  animation: typing 1.4s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}

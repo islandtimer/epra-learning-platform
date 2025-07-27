@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modal Test</title>
+  <link href="css/modal-fix.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  
+  <style>
+    body {
+      padding: 2rem;
+      font-family: Arial, sans-serif;
+    }
+    .test-btn {
+      background: #0d6efd;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+    .test-btn:hover {
+      background: #0b5ed7;
+    }
+  </style>
+</head>
+<body>
+  <h1>Modal Functionality Test</h1>
+  <p>Click the button below to test the modal:</p>
+  
+  <button class="test-btn" onclick="showTestModal()">
+    <i class="fa-solid fa-gear me-2"></i>Open User Preferences
+  </button>
+
+  <!-- Settings Modal -->
+  <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="settingsModalLabel">
+            <i class="fa-solid fa-gear me-2"></i>User Preferences
+          </h5>
+          <button type="button" class="btn-close" onclick="hideTestModal()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-info">
+            <i class="fa-solid fa-info-circle me-2"></i>
+            <strong>Note:</strong> API keys are configured server-side for security. These are your personal preferences.
+          </div>
+
+          <div class="mb-3">
+            <label for="themeSelect" class="form-label">
+              <i class="fa-solid fa-palette me-2"></i>Theme
+            </label>
+            <select class="form-select" id="themeSelect">
+              <option value="light">Light Mode</option>
+              <option value="dark">Dark Mode</option>
+              <option value="auto">Auto (System Preference)</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="languageSelect" class="form-label">
+              <i class="fa-solid fa-globe me-2"></i>Language
+            </label>
+            <select class="form-select" id="languageSelect">
+              <option value="en">English</option>
+              <option value="es">Español</option>
+              <option value="fr">Français</option>
+              <option value="zh">中文</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="notificationsEnabled">
+              <label class="form-check-label" for="notificationsEnabled">
+                <i class="fa-solid fa-bell me-2"></i>Enable notifications
+              </label>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="autoSaveProgress" checked>
+              <label class="form-check-label" for="autoSaveProgress">
+                <i class="fa-solid fa-save me-2"></i>Auto-save learning progress
+              </label>
+            </div>
+          </div>
+
+          <div id="settingsStatus" class="mt-3"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="hideTestModal()">
+            <i class="fa-solid fa-times me-2"></i>Cancel
+          </button>
+          <button type="button" class="btn btn-primary" onclick="saveTestSettings()">
+            <i class="fa-solid fa-save me-2"></i>Save Preferences
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTestModal() {
+      console.log('Opening test modal...');
+      const modal = document.getElementById('settingsModal');
+      
+      modal.classList.add('show');
+      modal.style.display = 'block';
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+      
+      // Add backdrop
+      if (!document.querySelector('.modal-backdrop')) {
+        const backdrop = document.createElement('div');
+        backdrop.className = 'modal-backdrop fade show';
+        backdrop.onclick = hideTestModal;
+        document.body.appendChild(backdrop);
+      }
+      
+      console.log('Test modal opened');
+    }
+
+    function hideTestModal() {
+      console.log('Closing test modal...');
+      const modal = document.getElementById('settingsModal');
+      
+      modal.classList.remove('show');
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+      
+      const backdrop = document.querySelector('.modal-backdrop');
+      if (backdrop) {
+        backdrop.remove();
+      }
+      
+      console.log('Test modal closed');
+    }
+
+    function saveTestSettings() {
+      const status = document.getElementById('settingsStatus');
+      status.innerHTML = '<div class="alert alert-success"><i class="fa-solid fa-check me-2"></i>Settings saved successfully!</div>';
+      
+      setTimeout(() => {
+        hideTestModal();
+      }, 1500);
+    }
+
+    // Escape key handler
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        hideTestModal();
+      }
+    });
+  </script>
+</body>
+</html>
