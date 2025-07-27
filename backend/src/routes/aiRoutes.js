@@ -199,7 +199,10 @@ router.get('/test-claude', authenticateToken, async (req, res) => {
       statusCode: error.response?.status,
       responseData: error.response?.data,
       keyConfigured: !!process.env.CLAUDE_API_KEY,
-      keyStart: process.env.CLAUDE_API_KEY ? process.env.CLAUDE_API_KEY.substring(0, 15) : 'missing'
+      keyStart: process.env.CLAUDE_API_KEY ? process.env.CLAUDE_API_KEY.substring(0, 15) : 'missing',
+      keyLength: process.env.CLAUDE_API_KEY ? process.env.CLAUDE_API_KEY.length : 0,
+      keyEnd: process.env.CLAUDE_API_KEY ? '...' + process.env.CLAUDE_API_KEY.substring(process.env.CLAUDE_API_KEY.length - 10) : 'missing',
+      authHeader: process.env.CLAUDE_API_KEY ? `Bearer ${process.env.CLAUDE_API_KEY.substring(0, 20)}...` : 'missing'
     });
   }
 });
