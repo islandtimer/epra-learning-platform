@@ -171,19 +171,35 @@ router.get('/health', authenticateToken, async (req, res) => {
 // Test Claude API key endpoint
 router.get('/test-claude', authenticateToken, async (req, res) => {
   try {
-    const response = await claudeService.generateResponse('Hello, are you working?', 'You are a helpful assistant. Respond briefly.');
+    // Test with minimal direct API call
+    const axios = require('axios');
+    const response = await axios.post('https://api.anthropic.com/v1/messages', {
+      model: 'claude-3-5-sonnet-20241022',
+      max_tokens: 100,
+      messages: [{ role: 'user', content: 'Hello' }]
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.CLAUDE_API_KEY}`,
+        'anthropic-version': '2023-06-01'
+      },
+      timeout: 10000
+    });
+
     res.json({
       success: true,
       message: 'Claude API key is working',
-      data: response
+      data: { response: response.data.content[0].text }
     });
   } catch (error) {
     res.json({
       success: false,
       message: 'Claude API key test failed',
       error: error.message,
+      statusCode: error.response?.status,
+      responseData: error.response?.data,
       keyConfigured: !!process.env.CLAUDE_API_KEY,
-      keyStart: process.env.CLAUDE_API_KEY ? process.env.CLAUDE_API_KEY.substring(0, 12) : 'missing'
+      keyStart: process.env.CLAUDE_API_KEY ? process.env.CLAUDE_API_KEY.substring(0, 15) : 'missing'
     });
   }
 });
