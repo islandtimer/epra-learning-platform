@@ -86,16 +86,21 @@ router.post('/chat', authenticateToken, validateChatRequest, trackApiUsage('clau
   } catch (error) {
     logger.error('Claude API endpoint error:', {
       error: error.message,
+      stack: error.stack,
       userId: req.user?.id,
-      query: req.body?.query?.substring(0, 100)
+      query: req.body?.query?.substring(0, 100),
+      fullError: error
     });
 
-    res.status(500).json({
-      success: false,
-      message: error.message === 'Claude API key not configured' 
-        ? 'AI service temporarily unavailable' 
-        : 'Failed to process request'
-    });
+    // Always respond to prevent hanging
+    if (!res.headersSent) {
+      res.status(500).json({
+        success: false,
+        message: error.message === 'Claude API key not configured' 
+          ? 'AI service temporarily unavailable' 
+          : `Failed to process request: ${error.message}`
+      });
+    }
   }
 });
 
