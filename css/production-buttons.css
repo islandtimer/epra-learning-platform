@@ -178,3 +178,38 @@
     opacity: 1;
   }
 }
+
+/* Modal fixes for interactivity */
+.modal {
+  pointer-events: auto !important;
+  z-index: 1055 !important;
+}
+
+.modal-dialog {
+  pointer-events: auto !important;
+  z-index: 1056 !important;
+}
+
+.modal-content {
+  pointer-events: auto !important;
+  z-index: 1057 !important;
+}
+
+.modal-backdrop {
+  pointer-events: auto !important;
+  z-index: 1054 !important;
+}
+
+/* Ensure form elements are interactive */
+#loginModal input,
+#loginModal button,
+#loginModal .btn-close {
+  pointer-events: auto !important;
+  z-index: 1058 !important;
+}
+
+/* Force input focus states */
+#loginModal input:focus {
+  outline: 2px solid #0d6efd !important;
+  outline-offset: 2px !important;
+}

@@ -721,11 +721,22 @@ class EPRAUnifiedApp {
     // Setup event handlers
     this.setupLoginModalHandlers();
 
-    // Handle real login
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      await this.performLogin();
-    });
+    // Handle real login - use setTimeout to ensure DOM is ready
+    setTimeout(() => {
+      const loginForm = document.getElementById('loginForm');
+      if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          await this.performLogin();
+        });
+      }
+      
+      // Focus on email field
+      const emailField = document.getElementById('loginEmail');
+      if (emailField) {
+        emailField.focus();
+      }
+    }, 100);
   }
 
   async performLogin() {
@@ -925,17 +936,29 @@ class EPRAUnifiedApp {
   }
 
   setupLoginModalHandlers() {
-    // Close button
-    const closeBtn = document.querySelector('#loginModal .btn-close');
-    if (closeBtn) {
-      closeBtn.onclick = () => this.hideLoginModal();
-    }
+    setTimeout(() => {
+      // Close button
+      const closeBtn = document.querySelector('#loginModal .btn-close');
+      if (closeBtn) {
+        closeBtn.onclick = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          this.hideLoginModal();
+        };
+      }
 
-    // Cancel button
-    const cancelBtn = document.querySelector('#loginModal .btn-secondary');
-    if (cancelBtn) {
-      cancelBtn.onclick = () => this.hideLoginModal();
-    }
+      // Cancel button
+      const cancelBtn = document.querySelector('#loginModal .btn-secondary');
+      if (cancelBtn) {
+        cancelBtn.onclick = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          this.hideLoginModal();
+        };
+      }
+
+      console.log('✅ Login modal handlers attached');
+    }, 50);
 
     // Escape key
     const escapeHandler = (e) => {
