@@ -153,6 +153,7 @@ router.get('/health', authenticateToken, async (req, res) => {
   const status = {
     claude: {
       configured: !!process.env.CLAUDE_API_KEY,
+      keyFormat: process.env.CLAUDE_API_KEY ? process.env.CLAUDE_API_KEY.substring(0, 12) + '...' : 'missing',
       available: true
     },
     perplexity: {
@@ -165,6 +166,26 @@ router.get('/health', authenticateToken, async (req, res) => {
     success: true,
     data: status
   });
+});
+
+// Test Claude API key endpoint
+router.get('/test-claude', authenticateToken, async (req, res) => {
+  try {
+    const response = await claudeService.generateResponse('Hello, are you working?', 'You are a helpful assistant. Respond briefly.');
+    res.json({
+      success: true,
+      message: 'Claude API key is working',
+      data: response
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: 'Claude API key test failed',
+      error: error.message,
+      keyConfigured: !!process.env.CLAUDE_API_KEY,
+      keyStart: process.env.CLAUDE_API_KEY ? process.env.CLAUDE_API_KEY.substring(0, 12) : 'missing'
+    });
+  }
 });
 
 module.exports = router;
