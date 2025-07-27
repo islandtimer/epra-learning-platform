@@ -18,8 +18,12 @@ const aiRoutes = require('./routes/aiRoutes');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Trust proxy for Railway hosting
-app.set('trust proxy', true);
+// Trust proxy for Railway hosting (more secure configuration)
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1); // Trust first proxy only
+} else {
+  app.set('trust proxy', false);
+}
 
 // Security middleware
 app.use(helmet({
@@ -55,29 +59,33 @@ if (process.env.NODE_ENV !== 'test') {
   app.use(morgan('combined', { stream: { write: message => logger.info(message.trim()) } }));
 }
 
-// Rate limiting
+// Rate limiting with proper proxy configuration
+const rateLimitConfig = {
+  standardHeaders: true,
+  legacyHeaders: false,
+  // Skip validation warnings for production deployment
+  validate: process.env.NODE_ENV !== 'production'
+};
+
 const globalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 1000, // limit each IP to 1000 requests per windowMs
   message: 'Too many requests from this IP, please try again later.',
-  standardHeaders: true,
-  legacyHeaders: false,
+  ...rateLimitConfig
 });
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 5, // limit each IP to 5 auth requests per windowMs
   message: 'Too many authentication attempts, please try again later.',
-  standardHeaders: true,
-  legacyHeaders: false,
+  ...rateLimitConfig
 });
 
 const aiLimiter = rateLimit({
   windowMs: 60 * 1000, // 1 minute
   max: 20, // limit each IP to 20 AI requests per minute
   message: 'AI request rate limit exceeded, please slow down.',
-  standardHeaders: true,
-  legacyHeaders: false,
+  ...rateLimitConfig
 });
 
 app.use(globalLimiter);
