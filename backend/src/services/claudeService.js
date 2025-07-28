@@ -25,12 +25,7 @@ class ClaudeService {
     } = options;
 
     try {
-      logger.info('Claude API request starting:', {
-        model: this.model,
-        query: query.substring(0, 50) + '...',
-        hasApiKey: !!this.apiKey,
-        apiKeyStart: this.apiKey ? this.apiKey.substring(0, 15) + '...' : 'missing'
-      });
+      logger.info('Claude API request starting', { model: this.model, hasApiKey: !!this.apiKey });
 
       const fullSystemPrompt = `You are EPRA, an expert assistant for Equator Principles risk assessment. 
       Use the project knowledge containing 20+ core EP documents to provide accurate, 
@@ -60,11 +55,7 @@ class ClaudeService {
         requestBody.project_id = this.projectId;
       }
 
-      logger.info('Making Claude API request:', {
-        url: this.baseURL,
-        model: this.model,
-        hasProjectId: !!this.projectId
-      });
+      logger.info('Making Claude API request', { model: this.model });
 
       const response = await axios.post(this.baseURL, requestBody, {
         headers: {
