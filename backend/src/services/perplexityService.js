@@ -5,7 +5,7 @@ class PerplexityService {
   constructor() {
     this.apiKey = process.env.PERPLEXITY_API_KEY;
     this.baseURL = 'https://api.perplexity.ai/chat/completions';
-    this.model = 'sonar reasoning'; // Default to reasoning model
+    this.model = 'sonar-reasoning'; // Default to reasoning model
     
     if (!this.apiKey) {
       logger.warn('Perplexity API key not configured');

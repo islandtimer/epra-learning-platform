@@ -23,8 +23,8 @@ const validateChatRequest = [
     .withMessage('includeRealTime must be a boolean'),
   body('model')
     .optional()
-    .isIn(['sonar', 'sonar reasoning', 'sonar deep research'])
-    .withMessage('Model must be one of: sonar, sonar reasoning, sonar deep research'),
+    .isIn(['sonar', 'sonar-reasoning', 'sonar-deep-research'])
+    .withMessage('Model must be one of: sonar, sonar-reasoning, sonar-deep-research'),
   body('systemPrompt')
     .optional()
     .isLength({ max: 1000 })
@@ -80,7 +80,7 @@ router.post('/chat', authenticateToken, validateChatRequest, trackApiUsage('perp
       ],
       focus: 'current EP4 2020 IFC Performance Standards 2012 environmental social risk management',
       excludeOutdated: true,
-      model: model || 'sonar reasoning' // Use selected model or default
+      model: model || 'sonar-reasoning' // Use selected model or default
     });
 
     // Log successful API usage
@@ -97,7 +97,7 @@ router.post('/chat', authenticateToken, validateChatRequest, trackApiUsage('perp
         sources: response.sources || [],
         citations: response.citations || [],
         usage: response.usage || {},
-        model: model || 'sonar reasoning',
+        model: model || 'sonar-reasoning',
         timestamp: new Date().toISOString()
       }
     });
@@ -193,7 +193,7 @@ router.get('/test-perplexity', authenticateToken, async (req, res) => {
     // Test with minimal direct API call
     const axios = require('axios');
     const response = await axios.post('https://api.perplexity.ai/chat/completions', {
-      model: 'sonar reasoning',
+      model: 'sonar-reasoning',
       messages: [{ role: 'user', content: 'What are the Equator Principles?' }],
       max_tokens: 200
     }, {
