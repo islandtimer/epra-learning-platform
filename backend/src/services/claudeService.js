@@ -38,10 +38,11 @@ class ClaudeService {
       const epSystemPrompt = systemPrompt || 'You are an expert assistant for the Equator Principles and sustainable finance. Provide helpful, accurate information about environmental and social risk management in project finance.';
       requestBody.system = epSystemPrompt;
 
-      // Project ID causes invalid request - need to find alternative for EP documents
-      // if (this.projectId) {
-      //   requestBody.project_id = this.projectId;
-      // }
+      // Try adding project ID with proper beta header
+      if (this.projectId) {
+        requestBody.project_id = this.projectId;
+        logger.info('Using Claude project ID for EP documents', { projectId: this.projectId.substring(0, 8) + '...' });
+      }
 
       logger.info('Making Claude API request', { model: this.model });
 
@@ -49,7 +50,9 @@ class ClaudeService {
         headers: {
           'Content-Type': 'application/json',
           'x-api-key': this.apiKey,
-          'anthropic-version': '2023-06-01'
+          'anthropic-version': '2023-06-01',
+          // Add beta header for projects
+          ...(this.projectId && { 'anthropic-beta': 'projects-2024-04-01' })
         },
         timeout: 30000
       });
