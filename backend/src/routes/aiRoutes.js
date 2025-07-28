@@ -182,41 +182,37 @@ router.get('/health', authenticateToken, async (req, res) => {
   });
 });
 
-// Test Claude API key endpoint
-router.get('/test-claude', authenticateToken, async (req, res) => {
+// Test Perplexity API key endpoint
+router.get('/test-perplexity', authenticateToken, async (req, res) => {
   try {
     // Test with minimal direct API call
     const axios = require('axios');
-    const response = await axios.post('https://api.anthropic.com/v1/messages', {
-      model: 'claude-3-haiku-20240307',
-      max_tokens: 100,
-      messages: [{ role: 'user', content: 'Hello' }]
+    const response = await axios.post('https://api.perplexity.ai/chat/completions', {
+      model: 'llama-3.1-sonar-small-128k-online',
+      messages: [{ role: 'user', content: 'What are the Equator Principles?' }],
+      max_tokens: 200
     }, {
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': process.env.CLAUDE_API_KEY,
-        'anthropic-version': '2023-06-01'
+        'Authorization': `Bearer ${process.env.PERPLEXITY_API_KEY}`
       },
       timeout: 10000
     });
 
     res.json({
       success: true,
-      message: 'Claude API key is working',
-      data: { response: response.data.content[0].text }
+      message: 'Perplexity API key is working',
+      data: { response: response.data.choices[0].message.content }
     });
   } catch (error) {
     res.json({
       success: false,
-      message: 'Claude API key test failed',
+      message: 'Perplexity API key test failed',
       error: error.message,
       statusCode: error.response?.status,
       responseData: error.response?.data,
-      keyConfigured: !!process.env.CLAUDE_API_KEY,
-      keyStart: process.env.CLAUDE_API_KEY ? process.env.CLAUDE_API_KEY.substring(0, 15) : 'missing',
-      keyLength: process.env.CLAUDE_API_KEY ? process.env.CLAUDE_API_KEY.length : 0,
-      keyEnd: process.env.CLAUDE_API_KEY ? '...' + process.env.CLAUDE_API_KEY.substring(process.env.CLAUDE_API_KEY.length - 10) : 'missing',
-      authHeader: process.env.CLAUDE_API_KEY ? `Bearer ${process.env.CLAUDE_API_KEY.substring(0, 20)}...` : 'missing'
+      keyConfigured: !!process.env.PERPLEXITY_API_KEY,
+      keyStart: process.env.PERPLEXITY_API_KEY ? process.env.PERPLEXITY_API_KEY.substring(0, 15) : 'missing'
     });
   }
 });
