@@ -19,8 +19,8 @@ class PerplexityService {
 
     const {
       domains = ['equator-principles.com', 'ifc.org', 'worldbank.org', 'ebrd.com'],
-      temperature = 0.2,
-      maxTokens = 1000,
+      temperature = 0.1, // More focused responses
+      maxTokens = 1500, // Prevent truncation
       model = this.model // Allow model override
     } = options;
 
@@ -31,12 +31,14 @@ class PerplexityService {
           role: 'user',
           content: `${query}
 
-IMPORTANT: Only reference CURRENT versions of documents:
-- Equator Principles EP4 (2020) from equator-principles.com/resources/
-- IFC Performance Standards (2012) from ifc.org/en/insights-reports/2012/ifc-performance-standards
-- Exclude outdated versions (e.g., 2006 IFC standards, EP3, etc.)
-
-Focus on providing authoritative, precise information with specific document citations and page references where possible.`
+CRITICAL INSTRUCTIONS:
+- Provide direct, professional answers without meta-commentary or process explanation
+- Only reference CURRENT versions: EP4 (2020) and IFC Performance Standards (2012)
+- Exclude outdated versions (EP3, 2006 IFC standards, etc.)
+- Use clear structure with headers and bullet points
+- Cite sources with [number] format
+- No "I need to..." or "Let me..." phrasing - answer directly
+- Maximum 800 words for concise, expert-level responses`
         }],
         temperature: temperature,
         max_tokens: maxTokens

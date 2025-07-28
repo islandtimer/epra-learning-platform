@@ -294,7 +294,7 @@ class EPRAUnifiedApp {
         body: JSON.stringify({ 
           query: message,
           model: selectedModel,
-          systemPrompt: 'You are an expert assistant for the Equator Principles and sustainable finance. Provide helpful, accurate information about environmental and social risk management in project finance.',
+          systemPrompt: 'You are a senior consultant specializing in Equator Principles and sustainable finance. Provide direct, authoritative responses about environmental and social risk management in project finance. Use professional language without process commentary.',
           includeRealTime: false
         })
       });
