@@ -6,7 +6,7 @@ class ClaudeService {
     this.apiKey = process.env.CLAUDE_API_KEY;
     this.projectId = process.env.CLAUDE_PROJECT_ID;
     this.baseURL = 'https://api.anthropic.com/v1/messages';
-    this.model = 'claude-3-haiku-20240307';
+    this.model = 'claude-3-5-sonnet-20241022';
     
     if (!this.apiKey) {
       logger.warn('Claude API key not configured');
@@ -38,10 +38,10 @@ class ClaudeService {
       const epSystemPrompt = systemPrompt || 'You are an expert assistant for the Equator Principles and sustainable finance. Provide helpful, accurate information about environmental and social risk management in project finance.';
       requestBody.system = epSystemPrompt;
 
-      // Add project ID for EP document access
-      if (this.projectId) {
-        requestBody.project_id = this.projectId;
-      }
+      // Project ID causes invalid request - need to find alternative for EP documents
+      // if (this.projectId) {
+      //   requestBody.project_id = this.projectId;
+      // }
 
       logger.info('Making Claude API request', { model: this.model });
 
