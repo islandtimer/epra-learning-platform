@@ -27,20 +27,16 @@ class ClaudeService {
     try {
       logger.info('Claude API request starting', { model: this.model, hasApiKey: !!this.apiKey });
 
-      const basePrompt = 'You are an expert assistant for the Equator Principles and sustainable finance. Use the EP documents in this project to provide accurate, cited responses about environmental and social risk management.';
-      const fullSystemPrompt = systemPrompt ? `${basePrompt} ${systemPrompt}` : basePrompt;
-
+      // Use minimal request format that worked in test endpoint
       const requestBody = {
         model: this.model,
-        system: fullSystemPrompt,
-        messages: [{ role: 'user', content: query }],
-        max_tokens: maxTokens,
-        temperature: temperature
+        max_tokens: Math.min(maxTokens, 1000), // Limit max tokens
+        messages: [{ role: 'user', content: query }]
       };
 
-      // Add project ID if available
-      if (this.projectId) {
-        requestBody.project_id = this.projectId;
+      // Only add system prompt if provided and keep it short
+      if (systemPrompt && systemPrompt.length < 500) {
+        requestBody.system = systemPrompt;
       }
 
       logger.info('Making Claude API request', { model: this.model });
