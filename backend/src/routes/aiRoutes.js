@@ -180,7 +180,7 @@ router.get('/test-claude', authenticateToken, async (req, res) => {
     }, {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.CLAUDE_API_KEY}`,
+        'x-api-key': process.env.CLAUDE_API_KEY,
         'anthropic-version': '2023-06-01'
       },
       timeout: 10000
