@@ -217,7 +217,8 @@ router.get('/test-perplexity', authenticateToken, async (req, res) => {
       statusCode: error.response?.status,
       responseData: error.response?.data,
       keyConfigured: !!process.env.PERPLEXITY_API_KEY,
-      keyStart: process.env.PERPLEXITY_API_KEY ? process.env.PERPLEXITY_API_KEY.substring(0, 15) : 'missing'
+      keyStart: process.env.PERPLEXITY_API_KEY ? process.env.PERPLEXITY_API_KEY.substring(0, 15) : 'missing',
+      fullError: error.response?.data || error.message
     });
   }
 });
