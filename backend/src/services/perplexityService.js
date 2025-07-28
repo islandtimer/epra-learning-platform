@@ -27,19 +27,18 @@ class PerplexityService {
     try {
       const response = await axios.post(this.baseURL, {
         model: model,
-        messages: [{
-          role: 'user',
-          content: `${query}
+        messages: [
+          {
+            role: 'system',
+            content: 'You are a senior consultant. Provide direct, structured answers without explaining your process. Start responses immediately with the answer.'
+          },
+          {
+            role: 'user',
+            content: `${query}
 
-CRITICAL INSTRUCTIONS:
-- Provide direct, professional answers without meta-commentary or process explanation
-- Only reference CURRENT versions: EP4 (2020) and IFC Performance Standards (2012)
-- Exclude outdated versions (EP3, 2006 IFC standards, etc.)
-- Use clear structure with headers and bullet points
-- Cite sources with [number] format
-- No "I need to..." or "Let me..." phrasing - answer directly
-- Maximum 800 words for concise, expert-level responses`
-        }],
+Answer format: Start with definition/answer immediately. Use markdown structure with ## headings, ### subheadings, bullet points. Cite sources [1][2]. Focus on current EP4 (2020) and IFC Standards (2012). Maximum 500 words.`
+          }
+        ],
         temperature: temperature,
         max_tokens: maxTokens
       }, {
