@@ -6,7 +6,7 @@ class ClaudeService {
     this.apiKey = process.env.CLAUDE_API_KEY;
     this.projectId = process.env.CLAUDE_PROJECT_ID;
     this.baseURL = 'https://api.anthropic.com/v1/messages';
-    this.model = 'claude-3-5-sonnet-20241022';
+    this.model = 'claude-3-haiku-20240307';
     
     if (!this.apiKey) {
       logger.warn('Claude API key not configured');
