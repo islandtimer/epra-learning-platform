@@ -5,7 +5,7 @@ class PerplexityService {
   constructor() {
     this.apiKey = process.env.PERPLEXITY_API_KEY;
     this.baseURL = 'https://api.perplexity.ai/chat/completions';
-    this.model = 'sonar';
+    this.model = 'sonar-reasoning'; // Default to reasoning model
     
     if (!this.apiKey) {
       logger.warn('Perplexity API key not configured');
@@ -20,12 +20,13 @@ class PerplexityService {
     const {
       domains = ['equator-principles.com', 'ifc.org', 'worldbank.org', 'ebrd.com'],
       temperature = 0.2,
-      maxTokens = 1000
+      maxTokens = 1000,
+      model = this.model // Allow model override
     } = options;
 
     try {
       const response = await axios.post(this.baseURL, {
-        model: this.model,
+        model: model,
         messages: [{
           role: 'user',
           content: `${query}

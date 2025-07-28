@@ -173,6 +173,18 @@ class EPRAUnifiedApp {
               </div>
             </div>
             <div class="chat-input-container">
+              <!-- Model Selection -->
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <label for="modelSelect" class="form-label mb-0 text-muted small">
+                  <i class="fa-solid fa-brain me-1"></i>AI Model:
+                </label>
+                <select id="modelSelect" class="form-select form-select-sm" style="width: auto;">
+                  <option value="sonar-reasoning" selected>Reasoning (Fast, balanced)</option>
+                  <option value="sonar-deep-research">Deep Research (Comprehensive analysis)</option>
+                  <option value="sonar">Basic (Quick responses)</option>
+                </select>
+              </div>
+              
               <form class="chat-input-form" id="chatForm">
                 <textarea 
                   class="chat-input" 
@@ -248,6 +260,7 @@ class EPRAUnifiedApp {
   async sendMessage() {
     const chatInput = document.getElementById('chatInput');
     const sendBtn = document.getElementById('sendBtn');
+    const modelSelect = document.getElementById('modelSelect');
 
     if (!chatInput || !chatInput.value.trim()) return;
     if (!this.isAuthenticated) {
@@ -256,6 +269,7 @@ class EPRAUnifiedApp {
     }
 
     const message = chatInput.value.trim();
+    const selectedModel = modelSelect ? modelSelect.value : 'sonar-reasoning';
     chatInput.value = '';
     chatInput.style.height = 'auto';
 
@@ -279,6 +293,7 @@ class EPRAUnifiedApp {
         },
         body: JSON.stringify({ 
           query: message,
+          model: selectedModel,
           systemPrompt: 'You are an expert assistant for the Equator Principles and sustainable finance. Provide helpful, accurate information about environmental and social risk management in project finance.',
           includeRealTime: false
         })
