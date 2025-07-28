@@ -59,20 +59,23 @@ router.post('/chat', authenticateToken, validateChatRequest, trackApiUsage('perp
     const { query } = req.body;
     const userId = req.user.id;
 
-    // Enhanced query for EP-specific search
-    const epQuery = `${query} site:equator-principles.com OR site:ifc.org OR site:worldbank.org OR site:unepfi.org`;
+    // Enhanced query targeting specific EP document locations and current versions
+    const epQuery = `${query} (site:equator-principles.com/resources/ OR site:ifc.org/en/insights-reports/2012/ifc-performance-standards) current version latest EP4 2020 IFC Performance Standards 2012`;
 
-    // Use Perplexity with domain focus for authoritative EP sources
+    // Use Perplexity with focus on primary authoritative sources
     const response = await perplexityService.searchCurrent(epQuery, { 
-      domains: [
-        'equator-principles.com',
-        'ifc.org', 
+      primaryDomains: [
+        'equator-principles.com/resources/',
+        'ifc.org/en/insights-reports/2012/ifc-performance-standards'
+      ],
+      secondaryDomains: [
         'worldbank.org',
         'unepfi.org',
         'ebrd.com',
         'adb.org'
       ],
-      focus: 'equator principles environmental social risk management'
+      focus: 'current EP4 2020 IFC Performance Standards 2012 environmental social risk management',
+      excludeOutdated: true
     });
 
     // Log successful API usage

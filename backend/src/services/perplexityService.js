@@ -28,7 +28,14 @@ class PerplexityService {
         model: this.model,
         messages: [{
           role: 'user',
-          content: `${query} - Focus on Equator Principles and environmental social risk management. Provide authoritative information with sources.`
+          content: `${query}
+
+IMPORTANT: Only reference CURRENT versions of documents:
+- Equator Principles EP4 (2020) from equator-principles.com/resources/
+- IFC Performance Standards (2012) from ifc.org/en/insights-reports/2012/ifc-performance-standards
+- Exclude outdated versions (e.g., 2006 IFC standards, EP3, etc.)
+
+Focus on providing authoritative, precise information with specific document citations and page references where possible.`
         }],
         temperature: temperature,
         max_tokens: maxTokens
