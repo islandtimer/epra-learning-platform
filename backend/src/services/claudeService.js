@@ -27,20 +27,8 @@ class ClaudeService {
     try {
       logger.info('Claude API request starting', { model: this.model, hasApiKey: !!this.apiKey });
 
-      const fullSystemPrompt = `You are EPRA, an expert assistant for Equator Principles risk assessment. 
-      Use the project knowledge containing 20+ core EP documents to provide accurate, 
-      cited responses. Always reference specific EP documents when applicable.
-
-      When providing answers:
-      1. Cite specific EP documents, sections, and page numbers when possible
-      2. Use the exact terminology from EP4 and IFC Performance Standards
-      3. Provide practical, actionable guidance for practitioners
-      4. Consider sector-specific requirements when relevant
-      5. Format responses with clear structure and bullet points when appropriate
-      6. Include relevant risk categories (A, B, C) when discussing project classification
-
-      ${includeContext ? `Additional context: ${includeContext}` : ''}
-      ${systemPrompt ? `Additional instructions: ${systemPrompt}` : ''}`;
+      const basePrompt = 'You are an expert assistant for the Equator Principles and sustainable finance. Use the EP documents in this project to provide accurate, cited responses about environmental and social risk management.';
+      const fullSystemPrompt = systemPrompt ? `${basePrompt} ${systemPrompt}` : basePrompt;
 
       const requestBody = {
         model: this.model,
