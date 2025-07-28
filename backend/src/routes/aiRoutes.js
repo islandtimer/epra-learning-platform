@@ -44,8 +44,8 @@ const validateSearchRequest = [
     .withMessage('Each domain must be a valid domain name')
 ];
 
-// Claude chat endpoint
-router.post('/chat', authenticateToken, validateChatRequest, trackApiUsage('claude'), async (req, res) => {
+// EP-focused chat endpoint using Perplexity for document access
+router.post('/chat', authenticateToken, validateChatRequest, trackApiUsage('perplexity'), async (req, res) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -56,31 +56,42 @@ router.post('/chat', authenticateToken, validateChatRequest, trackApiUsage('clau
       });
     }
 
-    const { query, includeRealTime = false, systemPrompt = '' } = req.body;
+    const { query } = req.body;
     const userId = req.user.id;
 
-    let response = await claudeService.generateResponse(query, systemPrompt);
+    // Enhanced query for EP-specific search
+    const epQuery = `${query} site:equator-principles.com OR site:ifc.org OR site:worldbank.org OR site:unepfi.org`;
 
-    // Enhance with real-time info if requested and query needs current info
-    if (includeRealTime || claudeService.needsCurrentInfo(query)) {
-      try {
-        response = await perplexityService.enhanceWithCurrentInfo(query, response);
-      } catch (error) {
-        logger.warn('Failed to enhance with real-time info:', error.message);
-        // Continue with Claude response only
-      }
-    }
+    // Use Perplexity with domain focus for authoritative EP sources
+    const response = await perplexityService.searchCurrent(epQuery, { 
+      domains: [
+        'equator-principles.com',
+        'ifc.org', 
+        'worldbank.org',
+        'unepfi.org',
+        'ebrd.com',
+        'adb.org'
+      ],
+      focus: 'equator principles environmental social risk management'
+    });
 
     // Log successful API usage
-    logger.info('Claude API request successful', {
+    logger.info('Perplexity EP search successful', {
       userId,
-      tokensUsed: response.usage?.output_tokens || 0,
-      query: query.substring(0, 100) + '...'
+      query: query.substring(0, 100) + '...',
+      sourcesFound: response.sources?.length || 0
     });
 
     res.json({
       success: true,
-      data: response
+      data: {
+        content: response.answer || response.text || response.content || 'No response received',
+        sources: response.sources || [],
+        citations: response.citations || [],
+        usage: response.usage || {},
+        model: 'perplexity-sonar-pro',
+        timestamp: new Date().toISOString()
+      }
     });
 
   } catch (error) {
