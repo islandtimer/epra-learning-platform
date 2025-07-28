@@ -5,7 +5,7 @@ class PerplexityService {
   constructor() {
     this.apiKey = process.env.PERPLEXITY_API_KEY;
     this.baseURL = 'https://api.perplexity.ai/chat/completions';
-    this.model = 'llama-3.1-sonar-large-128k-online';
+    this.model = 'sonar';
     
     if (!this.apiKey) {
       logger.warn('Perplexity API key not configured');

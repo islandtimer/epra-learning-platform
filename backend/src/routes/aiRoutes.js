@@ -188,7 +188,7 @@ router.get('/test-perplexity', authenticateToken, async (req, res) => {
     // Test with minimal direct API call
     const axios = require('axios');
     const response = await axios.post('https://api.perplexity.ai/chat/completions', {
-      model: 'llama-3.1-sonar-large-128k-online',
+      model: 'sonar',
       messages: [{ role: 'user', content: 'What are the Equator Principles?' }],
       max_tokens: 200
     }, {
