@@ -179,8 +179,8 @@ class EPRAUnifiedApp {
                   <i class="fa-solid fa-brain me-1"></i>AI Model:
                 </label>
                 <select id="modelSelect" class="form-select form-select-sm" style="width: auto;">
-                  <option value="sonar-reasoning" selected>Reasoning (Fast, balanced)</option>
-                  <option value="sonar-deep-research">Deep Research (Comprehensive analysis)</option>
+                  <option value="sonar reasoning" selected>Reasoning (Fast, balanced)</option>
+                  <option value="sonar deep research">Deep Research (Comprehensive analysis)</option>
                   <option value="sonar">Basic (Quick responses)</option>
                 </select>
               </div>
