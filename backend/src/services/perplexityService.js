@@ -28,14 +28,8 @@ class PerplexityService {
         model: this.model,
         messages: [{
           role: 'user',
-          content: `Search for current information about: ${query}. 
-          Focus on regulatory updates, policy changes, and industry developments 
-          related to Equator Principles and environmental finance. 
-          Provide specific sources and dates when available.`
+          content: `${query} - Focus on Equator Principles and environmental social risk management. Provide authoritative information with sources.`
         }],
-        search_domain_filter: domains,
-        return_citations: true,
-        return_images: false,
         temperature: temperature,
         max_tokens: maxTokens
       }, {
@@ -46,10 +40,12 @@ class PerplexityService {
         timeout: 30000
       });
 
+      const content = response.data.choices[0].message.content;
+      
       return {
-        content: response.data.choices[0].message.content,
-        citations: response.data.citations || [],
-        sources: response.data.choices[0].message.sources || [],
+        answer: content,
+        content: content,
+        sources: response.data.citations || [],
         usage: response.data.usage || {},
         timestamp: new Date().toISOString()
       };
