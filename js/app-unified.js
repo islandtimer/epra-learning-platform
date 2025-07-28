@@ -305,9 +305,12 @@ class EPRAUnifiedApp {
       this.removeLoadingMessage(loadingMsgId);
 
       if (data.success) {
-        // Extract response from Claude service response structure
-        const aiResponse = data.data.content || data.data.response || data.data.text || 'No response received';
-        this.addMessageToChat('ai', aiResponse);
+        // Extract response from service response structure
+        const rawResponse = data.data.content || data.data.response || data.data.text || 'No response received';
+        
+        // Process response to separate thinking from final answer
+        const processedResponse = this.processAIResponse(rawResponse);
+        this.addMessageToChat('ai', processedResponse.finalAnswer, processedResponse.thinking);
       } else {
         // Handle API error
         this.addMessageToChat('ai', `Sorry, I encountered an error: ${data.message}. Please try again.`);
@@ -326,7 +329,7 @@ class EPRAUnifiedApp {
     }
   }
 
-  addMessageToChat(sender, content) {
+  addMessageToChat(sender, content, thinking = null) {
     const chatMessages = document.getElementById('chatMessages');
     if (!chatMessages) return;
 
@@ -339,9 +342,29 @@ class EPRAUnifiedApp {
     const messageEl = document.createElement('div');
     messageEl.className = `chat-msg ${sender}`;
     
+    let thinkingHTML = '';
+    if (thinking && sender === 'ai') {
+      thinkingHTML = `
+        <div class="thinking-container mb-2">
+          <details class="thinking-details">
+            <summary class="thinking-summary">
+              <i class="fa-solid fa-brain me-2"></i>AI Reasoning Process
+              <small class="text-muted ms-2">(Click to expand)</small>
+            </summary>
+            <div class="thinking-content">
+              <pre class="thinking-text">${thinking}</pre>
+            </div>
+          </details>
+        </div>
+      `;
+    }
+    
     messageEl.innerHTML = `
       <div class="avatar">${sender === 'user' ? 'You' : 'AI'}</div>
-      <div class="content">${content}</div>
+      <div class="content">
+        ${thinkingHTML}
+        <div class="response-content">${content}</div>
+      </div>
     `;
 
     chatMessages.appendChild(messageEl);
@@ -355,6 +378,56 @@ class EPRAUnifiedApp {
       messageEl.style.opacity = '1';
       messageEl.style.transform = 'translateY(0)';
     });
+  }
+
+  processAIResponse(rawResponse) {
+    // Extract thinking process and clean final answer
+    let thinking = '';
+    let finalAnswer = rawResponse;
+
+    // Look for various thinking patterns
+    const thinkingPatterns = [
+      /<think>(.*?)<\/think>/s,
+      /^(Okay|Well|Let me|Alright|So|Now).*?(?=##|The |This |Here)/s,
+      /^.*?(?:Let me tackle|I need to|The user wants|First,).*?(?=##|The |This |Here)/s
+    ];
+
+    for (const pattern of thinkingPatterns) {
+      const match = rawResponse.match(pattern);
+      if (match) {
+        thinking = match[1] || match[0];
+        finalAnswer = rawResponse.replace(match[0], '').trim();
+        break;
+      }
+    }
+
+    // If no clear pattern, try to detect meta-commentary at the start
+    const lines = rawResponse.split('\n');
+    const firstStructuredLine = lines.findIndex(line => 
+      line.trim().startsWith('##') || 
+      line.trim().startsWith('The ') || 
+      line.trim().startsWith('**') ||
+      line.includes('Performance Standards') ||
+      line.includes('Equator Principles')
+    );
+
+    if (firstStructuredLine > 0) {
+      thinking = lines.slice(0, firstStructuredLine).join('\n').trim();
+      finalAnswer = lines.slice(firstStructuredLine).join('\n').trim();
+    }
+
+    // Clean up the final answer
+    finalAnswer = finalAnswer
+      .replace(/^(Okay|Well|Let me|Alright|So|Now).*?\n/gm, '')
+      .replace(/I need to.*?\n/gm, '')
+      .replace(/The user.*?\n/gm, '')
+      .replace(/First,.*?\n/gm, '')
+      .trim();
+
+    return {
+      thinking: thinking || null,
+      finalAnswer: finalAnswer || rawResponse
+    };
   }
 
   addLoadingMessage() {

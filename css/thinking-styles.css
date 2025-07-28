@@ -1,0 +1,94 @@
+/* AI Thinking Process Styles */
+.thinking-container {
+  border-left: 3px solid #e9ecef;
+  background-color: #f8f9fa;
+  border-radius: 0.375rem;
+  margin-bottom: 0.75rem;
+}
+
+.thinking-details {
+  margin: 0;
+}
+
+.thinking-summary {
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6c757d;
+  transition: all 0.2s ease;
+  list-style: none;
+}
+
+.thinking-summary:hover {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.thinking-summary::-webkit-details-marker {
+  display: none;
+}
+
+.thinking-summary::before {
+  content: '▶';
+  display: inline-block;
+  margin-right: 0.5rem;
+  transition: transform 0.2s ease;
+  font-size: 0.75rem;
+}
+
+.thinking-details[open] .thinking-summary::before {
+  transform: rotate(90deg);
+}
+
+.thinking-content {
+  padding: 0.75rem;
+  border-top: 1px solid #e9ecef;
+  background-color: #ffffff;
+  border-radius: 0 0 0.375rem 0.375rem;
+}
+
+.thinking-text {
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: #6c757d;
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.response-content {
+  margin-top: 0.5rem;
+}
+
+/* Dark mode support */
+[data-color-scheme="dark"] .thinking-container {
+  border-left-color: #495057;
+  background-color: #343a40;
+}
+
+[data-color-scheme="dark"] .thinking-summary {
+  background-color: #343a40;
+  color: #adb5bd;
+}
+
+[data-color-scheme="dark"] .thinking-summary:hover {
+  background-color: #495057;
+  color: #dee2e6;
+}
+
+[data-color-scheme="dark"] .thinking-content {
+  background-color: #212529;
+  border-top-color: #495057;
+}
+
+[data-color-scheme="dark"] .thinking-text {
+  color: #adb5bd;
+}
